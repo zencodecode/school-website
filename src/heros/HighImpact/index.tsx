@@ -41,9 +41,25 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white"
+      className="relative -mt-[10.4rem] flex items-center justify-center min-h-[80vh] text-white"
       data-theme="dark"
     >
+      {/* Background media sits behind the content and fills the sized hero. */}
+      {isCarousel ? (
+        <HeroCarousel
+          autoplay={autoplay ?? true}
+          autoplayInterval={autoplayInterval ?? 5000}
+          slides={slideImages}
+        />
+      ) : (
+        slideImages[0] && (
+          <div className="absolute inset-0 -z-10 select-none">
+            <Media fill imgClassName="object-cover" priority resource={slideImages[0]} />
+          </div>
+        )
+      )}
+
+      {/* Foreground content overlays the media. */}
       <div className="container mb-8 z-10 relative flex items-center justify-center">
         <div className="max-w-[36.5rem] md:text-center">
           {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
@@ -60,20 +76,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           )}
         </div>
       </div>
-
-      {isCarousel ? (
-        <HeroCarousel
-          autoplay={autoplay ?? true}
-          autoplayInterval={autoplayInterval ?? 5000}
-          slides={slideImages}
-        />
-      ) : (
-        <div className="min-h-[80vh] select-none">
-          {slideImages[0] && (
-            <Media fill imgClassName="-z-10 object-cover" priority resource={slideImages[0]} />
-          )}
-        </div>
-      )}
     </div>
   )
 }
@@ -123,7 +125,7 @@ const HeroCarousel: React.FC<{
 
   return (
     <div
-      className="absolute inset-0 -z-10 select-none min-h-[80vh]"
+      className="absolute inset-0 -z-10 select-none"
       role="region"
       aria-roledescription="carousel"
       aria-label="Hero images"
@@ -132,7 +134,7 @@ const HeroCarousel: React.FC<{
         <div className="flex h-full">
           {slides.map((image, i) => (
             <div
-              className="relative flex-[0_0_100%] min-w-0 min-h-[80vh]"
+              className="relative flex-[0_0_100%] min-w-0 h-full"
               key={i}
               role="group"
               aria-roledescription="slide"
