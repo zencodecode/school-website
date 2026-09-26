@@ -9,6 +9,13 @@ import {
 
 import { linkGroup } from '@/fields/linkGroup'
 
+// Shape of the sibling fields within the hero group, used for conditional
+// validation of the `media` field.
+type HeroData = {
+  type?: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact'
+  highImpactVariant?: 'single' | 'carousel'
+}
+
 export const hero: Field = {
   name: 'hero',
   type: 'group',
@@ -89,7 +96,19 @@ export const hero: Field = {
         description: 'The hero image shown for Medium Impact and single-image High Impact heroes.',
       },
       relationTo: 'media',
-      required: false,
+      // Payload cannot mark `required` conditionally, so require the image only
+      // for Medium Impact and single-image High Impact heroes via a validator.
+      validate: (value: unknown, { siblingData }: { siblingData?: Partial<HeroData> }) => {
+        const { type, highImpactVariant } = siblingData ?? {}
+        const needsMedia =
+          type === 'mediumImpact' || (type === 'highImpact' && highImpactVariant !== 'carousel')
+
+        if (needsMedia && !value) {
+          return 'A hero image is required for this hero type.'
+        }
+
+        return true
+      },
     },
     {
       name: 'slides',
