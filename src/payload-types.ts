@@ -199,7 +199,24 @@ export interface Page {
           id?: string | null;
         }[]
       | null;
+    /**
+     * Used by Medium Impact. For High Impact this is an optional fallback image shown when no carousel slides are added.
+     */
     media?: (string | null) | Media;
+    /**
+     * Add two or more images to turn the High Impact hero into a carousel. A single slide renders as a static image.
+     */
+    slides?:
+      | {
+          image: string | Media;
+          id?: string | null;
+        }[]
+      | null;
+    autoplay?: boolean | null;
+    /**
+     * Time each slide is shown before advancing, in milliseconds.
+     */
+    autoplayInterval?: number | null;
   };
   layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
   meta?: {
@@ -1072,6 +1089,14 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        slides?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
+        autoplay?: T;
+        autoplayInterval?: T;
       };
   layout?:
     | T
