@@ -16,6 +16,7 @@ type HeroMedia = NonNullable<Page['hero']['media']>
 export const HighImpactHero: React.FC<Page['hero']> = ({
   autoplay,
   autoplayInterval,
+  highImpactVariant,
   links,
   media,
   richText,
@@ -27,17 +28,19 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
     setHeaderTheme('dark')
   })
 
-  // Collect the images to render. Prefer configured carousel slides; fall back
-  // to the single `media` upload so existing pages keep working unchanged.
+  // Carousel slide images configured in the admin.
   const slideImages: HeroMedia[] = (slides ?? [])
     .map((slide) => slide?.image)
     .filter((image): image is HeroMedia => Boolean(image) && typeof image === 'object')
 
-  if (slideImages.length === 0 && media && typeof media === 'object') {
-    slideImages.push(media)
-  }
+  // The layout is chosen explicitly in the admin. Fall back to a carousel only
+  // when the variant is unset (legacy data) but multiple slides exist.
+  const isCarousel =
+    highImpactVariant === 'carousel' || (highImpactVariant == null && slideImages.length > 1)
 
-  const isCarousel = slideImages.length > 1
+  // Single-image layout uses `media`, falling back to the first slide.
+  const singleImage: HeroMedia | undefined =
+    media && typeof media === 'object' ? media : slideImages[0]
 
   return (
     <div
@@ -45,26 +48,28 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       data-theme="dark"
     >
       {/* Background media sits behind the content and fills the sized hero. */}
-      {isCarousel ? (
+      {isCarousel && slideImages.length > 0 ? (
         <HeroCarousel
           autoplay={autoplay ?? true}
           autoplayInterval={autoplayInterval ?? 5000}
           slides={slideImages}
         />
       ) : (
-        slideImages[0] && (
-          <div className="absolute inset-0 -z-10 select-none">
-            <Media fill imgClassName="object-cover" priority resource={slideImages[0]} />
+        singleImage && (
+          <div className="absolute inset-0 z-0 select-none">
+            <Media fill imgClassName="object-cover" priority resource={singleImage} />
           </div>
         )
       )}
 
-      {/* Foreground content overlays the media. */}
-      <div className="container mb-8 z-10 relative flex items-center justify-center">
+      {/* Foreground content overlays the media. `pointer-events-none` lets clicks
+          over empty areas fall through to the carousel controls; interactive
+          children re-enable pointer events. */}
+      <div className="container mb-8 z-10 relative flex items-center justify-center pointer-events-none">
         <div className="max-w-[36.5rem] md:text-center">
           {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex md:justify-center gap-4">
+            <ul className="flex md:justify-center gap-4 pointer-events-auto">
               {links.map(({ link }, i) => {
                 return (
                   <li key={i}>
@@ -124,28 +129,32 @@ const HeroCarousel: React.FC<{
   }, [])
 
   return (
-    <div
-      className="absolute inset-0 -z-10 select-none"
-      role="region"
-      aria-roledescription="carousel"
-      aria-label="Hero images"
-    >
-      <div className="overflow-hidden h-full" ref={emblaRef}>
-        <div className="flex h-full">
-          {slides.map((image, i) => (
-            <div
-              className="relative flex-[0_0_100%] min-w-0 h-full"
-              key={i}
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`${i + 1} of ${slides.length}`}
-            >
-              <Media fill imgClassName="object-cover" priority={i === 0} resource={image} />
-            </div>
-          ))}
+    <>
+      {/* Image track: back layer. */}
+      <div
+        className="absolute inset-0 z-0 select-none"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Hero images"
+      >
+        <div className="overflow-hidden h-full" ref={emblaRef}>
+          <div className="flex h-full">
+            {slides.map((image, i) => (
+              <div
+                className="relative flex-[0_0_100%] min-w-0 h-full"
+                key={i}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${i + 1} of ${slides.length}`}
+              >
+                <Media fill imgClassName="object-cover" priority={i === 0} resource={image} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
+      {/* Controls: top layer, above the foreground content so they are clickable. */}
       <button
         aria-label="Previous slide"
         className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
@@ -178,6 +187,6 @@ const HeroCarousel: React.FC<{
           />
         ))}
       </div>
-    </div>
+    </>
   )
 }

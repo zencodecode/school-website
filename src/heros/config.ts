@@ -59,15 +59,34 @@ export const hero: Field = {
       },
     }),
     {
+      name: 'highImpactVariant',
+      type: 'select',
+      label: 'High Impact layout',
+      defaultValue: 'single',
+      options: [
+        {
+          label: 'Single image',
+          value: 'single',
+        },
+        {
+          label: 'Carousel slider',
+          value: 'carousel',
+        },
+      ],
+      admin: {
+        condition: (_, { type } = {}) => type === 'highImpact',
+        description: 'Choose whether the High Impact hero shows one image or an autoplay carousel.',
+      },
+    },
+    {
       name: 'media',
       type: 'upload',
       admin: {
-        // High impact now supports a carousel via `slides`, so `media` is only
-        // required (and shown) for medium impact. It also stays as the fallback
-        // image for high impact when no slides are configured.
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
-        description:
-          'Used by Medium Impact. For High Impact this is an optional fallback image shown when no carousel slides are added.',
+        // Shown for Medium Impact, and for High Impact when the "single image"
+        // layout is selected. Also used as a fallback background for carousel.
+        condition: (_, { type, highImpactVariant } = {}) =>
+          type === 'mediumImpact' || (type === 'highImpact' && highImpactVariant !== 'carousel'),
+        description: 'The hero image shown for Medium Impact and single-image High Impact heroes.',
       },
       relationTo: 'media',
       required: false,
@@ -81,9 +100,9 @@ export const hero: Field = {
         plural: 'Slides',
       },
       admin: {
-        condition: (_, { type } = {}) => type === 'highImpact',
-        description:
-          'Add two or more images to turn the High Impact hero into a carousel. A single slide renders as a static image.',
+        condition: (_, { type, highImpactVariant } = {}) =>
+          type === 'highImpact' && highImpactVariant === 'carousel',
+        description: 'Add the images to show in the carousel. Add two or more for a slider.',
       },
       fields: [
         {
@@ -100,7 +119,8 @@ export const hero: Field = {
       label: 'Autoplay carousel',
       defaultValue: true,
       admin: {
-        condition: (_, { type } = {}) => type === 'highImpact',
+        condition: (_, { type, highImpactVariant } = {}) =>
+          type === 'highImpact' && highImpactVariant === 'carousel',
       },
     },
     {
@@ -110,7 +130,8 @@ export const hero: Field = {
       defaultValue: 5000,
       min: 1000,
       admin: {
-        condition: (_, { type, autoplay } = {}) => type === 'highImpact' && Boolean(autoplay),
+        condition: (_, { type, highImpactVariant, autoplay } = {}) =>
+          type === 'highImpact' && highImpactVariant === 'carousel' && Boolean(autoplay),
         description: 'Time each slide is shown before advancing, in milliseconds.',
         step: 500,
       },

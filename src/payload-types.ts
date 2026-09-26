@@ -200,11 +200,15 @@ export interface Page {
         }[]
       | null;
     /**
-     * Used by Medium Impact. For High Impact this is an optional fallback image shown when no carousel slides are added.
+     * Choose whether the High Impact hero shows one image or an autoplay carousel.
+     */
+    highImpactVariant?: ('single' | 'carousel') | null;
+    /**
+     * The hero image shown for Medium Impact and single-image High Impact heroes.
      */
     media?: (string | null) | Media;
     /**
-     * Add two or more images to turn the High Impact hero into a carousel. A single slide renders as a static image.
+     * Add the images to show in the carousel. Add two or more for a slider.
      */
     slides?:
       | {
@@ -1088,6 +1092,7 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               id?: T;
             };
+        highImpactVariant?: T;
         media?: T;
         slides?:
           | T
