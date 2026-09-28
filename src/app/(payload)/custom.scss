@@ -1,10 +1,52 @@
 // =============================================================================
-// Payload Admin Panel — Custom SCSS overrides
+// Payload Admin Panel — Custom Theme (Emerald Green)
 //
-// This file is the official entry point for admin panel customization.
-// It is imported by Payload's auto-generated layout.tsx.
-//
-// Color theming lives in src/styles/payloadStyles.css and is pulled in below.
+// Override Payload's --color-success-* (accent/focus/buttons) and --color-blue-*
+// (selection/links) to emerald green. These rules sit outside @layer, so they
+// beat Payload's @layer payload-default defaults — no !important needed.
+// Dark mode is auto-handled by Payload's internal inversion mapping.
 // =============================================================================
 
-@import '../../styles/payloadStyles';
+:root {
+  // ── Accent / brand (emerald green) ──────────────────────────────────────────
+  --color-success-50:  rgb(236, 253, 245);
+  --color-success-100: rgb(209, 250, 229);
+  --color-success-150: rgb(187, 247, 217);
+  --color-success-200: rgb(167, 243, 208);
+  --color-success-250: rgb(134, 239, 195);
+  --color-success-300: rgb(110, 231, 183);
+  --color-success-350: rgb(74, 222, 168);
+  --color-success-400: rgb(52, 211, 153);
+  --color-success-450: rgb(32, 198, 140);
+  --color-success-500: rgb(16, 185, 129);
+  --color-success-550: rgb(10, 167, 116);
+  --color-success-600: rgb(5, 150, 105);
+  --color-success-650: rgb(4, 135, 96);
+  --color-success-700: rgb(4, 120, 87);
+  --color-success-750: rgb(5, 107, 78);
+  --color-success-800: rgb(6, 95, 70);
+  --color-success-850: rgb(6, 86, 64);
+  --color-success-900: rgb(6, 78, 59);
+  --color-success-950: rgb(2, 44, 34);
+
+  // ── Selection / link highlights (same emerald) ──────────────────────────────
+  --color-blue-50:  rgb(236, 253, 245);
+  --color-blue-100: rgb(209, 250, 229);
+  --color-blue-150: rgb(187, 247, 217);
+  --color-blue-200: rgb(167, 243, 208);
+  --color-blue-250: rgb(134, 239, 195);
+  --color-blue-300: rgb(110, 231, 183);
+  --color-blue-350: rgb(74, 222, 168);
+  --color-blue-400: rgb(52, 211, 153);
+  --color-blue-450: rgb(32, 198, 140);
+  --color-blue-500: rgb(16, 185, 129);
+  --color-blue-550: rgb(10, 167, 116);
+  --color-blue-600: rgb(5, 150, 105);
+  --color-blue-650: rgb(4, 135, 96);
+  --color-blue-700: rgb(4, 120, 87);
+  --color-blue-750: rgb(5, 107, 78);
+  --color-blue-800: rgb(6, 95, 70);
+  --color-blue-850: rgb(6, 86, 64);
+  --color-blue-900: rgb(6, 78, 59);
+  --color-blue-950: rgb(2, 44, 34);
+}
