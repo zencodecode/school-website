@@ -12,6 +12,7 @@ public/media/
 
 public/robots.txt
 public/sitemap*.xml
+public/images/
 
 
 # Playwright
