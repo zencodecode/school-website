@@ -71,7 +71,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
           heading tags (h1–h4) are styled by the prose typography plugin. */}
       <div className="container mb-8 z-10 relative flex items-end pointer-events-none">
         <div className="w-full">
-          {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+          {richText && <RichText className="mb-6" data={richText} enableGutter={false} enableProse={false} />}
           {Array.isArray(links) && links.length > 0 && (
             <ul className="flex gap-4 pointer-events-auto">
               {links.map(({ link }, i) => {
