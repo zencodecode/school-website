@@ -222,7 +222,7 @@ export interface Page {
      */
     autoplayInterval?: number | null;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | OrgStructureBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -796,6 +796,25 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OrgStructureBlock".
+ */
+export interface OrgStructureBlock {
+  title?: string | null;
+  members?:
+    | {
+        name: string;
+        position: string;
+        photo?: (string | null) | Media;
+        order?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'orgStructure';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1111,6 +1130,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        orgStructure?: T | OrgStructureBlockSelect<T>;
       };
   meta?:
     | T
@@ -1207,6 +1227,24 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OrgStructureBlock_select".
+ */
+export interface OrgStructureBlockSelect<T extends boolean = true> {
+  title?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        position?: T;
+        photo?: T;
+        order?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1677,6 +1715,27 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        style?: ('link' | 'dropdown') | null;
+        subNavItems?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1728,6 +1787,21 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+            };
+        style?: T;
+        subNavItems?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };

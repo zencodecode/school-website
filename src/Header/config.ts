@@ -16,6 +16,23 @@ export const Header: GlobalConfig = {
         link({
           appearances: false,
         }),
+        {
+          name: 'style',
+          type: 'select',
+          defaultValue: 'link',
+          options: [
+            { label: 'Link', value: 'link' },
+            { label: 'Dropdown', value: 'dropdown' },
+          ],
+        },
+        {
+          name: 'subNavItems',
+          type: 'array',
+          admin: {
+            condition: (_, siblingData) => siblingData?.style === 'dropdown',
+          },
+          fields: [link({ appearances: false })],
+        },
       ],
       maxRows: 6,
       admin: {

@@ -12,6 +12,7 @@ import {
 } from '@payloadcms/richtext-lexical/react'
 
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+import { textStateConfig } from '@/fields/textStateConfig'
 
 import type {
   BannerBlock as BannerBlockProps,
@@ -35,9 +36,37 @@ const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
   return relationTo === 'posts' ? `/posts/${slug}` : `/${slug}`
 }
 
+const NODE_STATE_KEY = '$'
+function hyphenToCamel(str: string): string {
+  return str.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase())
+}
+
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   ...LinkJSXConverter({ internalDocToHref }),
+  text: (args) => {
+    const { node } = args
+
+    let text =
+      typeof defaultConverters.text === 'function' ? defaultConverters.text(args) : node.text
+
+    const nodeState = (node as any)[NODE_STATE_KEY] as Record<string, string> | undefined
+    if (nodeState) {
+      const styles: React.CSSProperties = {}
+      for (const [stateKey, stateValue] of Object.entries(nodeState)) {
+        const css = (textStateConfig as any)[stateKey]?.[stateValue]?.css
+        if (css) {
+          for (const [prop, value] of Object.entries(css)) {
+            ;(styles as any)[hyphenToCamel(prop)] = value
+          }
+        }
+      }
+      if (Object.keys(styles).length > 0) {
+        text = <span style={styles}>{text}</span>
+      }
+    }
+    return text
+  },
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
     mediaBlock: ({ node }) => (
