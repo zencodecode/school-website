@@ -45,6 +45,7 @@
   --breakpoint-2xl: 86rem;
   --font-mono: var(--font-geist-mono);
   --font-sans: var(--font-geist-sans);
+  --font-headline: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
 }
 
 @layer utilities {
@@ -205,6 +206,11 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
+
+  /* ── Stitch design tokens ── */
+  --color-gold-badge: #fbbf24;
+  --color-gold-badge-bg: #fef3c7;
+  --color-dark-section: #0b0f17;
 }
 
 @layer base {

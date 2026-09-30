@@ -222,7 +222,19 @@ export interface Page {
      */
     autoplayInterval?: number | null;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | OrgStructureBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | OrgStructureBlock
+    | StatsGridBlock
+    | FeatureGridBlock
+    | ProgramGridBlock
+    | TestimonialBlock
+    | DonationCampaignBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -815,6 +827,164 @@ export interface OrgStructureBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsGridBlock".
+ */
+export interface StatsGridBlock {
+  items?:
+    | {
+        label: string;
+        value: string;
+        description?: string | null;
+        /**
+         * Material Symbols icon name, e.g. groups, menu_book, verified, school
+         */
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'statsGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGridBlock".
+ */
+export interface FeatureGridBlock {
+  sectionLabel?: string | null;
+  heading: string;
+  description?: string | null;
+  features?:
+    | {
+        badge?: string | null;
+        badgeStyle?: ('primary' | 'secondary' | 'gold') | null;
+        heading: string;
+        description: string;
+        /**
+         * Material Symbols icon name (optional)
+         */
+        icon?: string | null;
+        colSpan?: ('half' | 'wide' | 'narrow') | null;
+        tags?:
+          | {
+              tag: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Optional bottom section with label and value
+         */
+        footnote?: {
+          label?: string | null;
+          value?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgramGridBlock".
+ */
+export interface ProgramGridBlock {
+  sectionLabel?: string | null;
+  heading: string;
+  programs?:
+    | {
+        /**
+         * Short code like "PROG-01"
+         */
+        code?: string | null;
+        /**
+         * Badge text like "Full Boarding"
+         */
+        badge?: string | null;
+        badgeStyle?: ('default' | 'gold') | null;
+        heading: string;
+        description: string;
+        specs?:
+          | {
+              label: string;
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        linkLabel?: string | null;
+        /**
+         * URL or anchor link, e.g. /programs or #section-id
+         */
+        linkUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'programGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  sectionLabel?: string | null;
+  /**
+   * The main quote text. Use the pipe character | to mark a highlighted phrase (e.g. "text |highlighted part| more text")
+   */
+  quote: string;
+  personName: string;
+  personTitle: string;
+  personCredentials?: string | null;
+  photo?: (string | null) | Media;
+  orgName?: string | null;
+  orgDescription?: string | null;
+  linkLabel?: string | null;
+  linkUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DonationCampaignBlock".
+ */
+export interface DonationCampaignBlock {
+  badge?: string | null;
+  heading: string;
+  description?: string | null;
+  /**
+   * Target amount in IDR (number only, e.g. 500000000)
+   */
+  targetAmount: number;
+  /**
+   * Collected amount in IDR
+   */
+  collectedAmount: number;
+  donorCount?: number | null;
+  auditInfo?: string | null;
+  donationOptions?:
+    | {
+        /**
+         * Amount in IDR
+         */
+        amount: number;
+        isHighlighted?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  bankInfo?: string | null;
+  ctaLabel?: string | null;
+  ctaUrl?: string | null;
+  secondaryCtaLabel?: string | null;
+  secondaryCtaUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'donationCampaign';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1131,6 +1301,11 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         orgStructure?: T | OrgStructureBlockSelect<T>;
+        statsGrid?: T | StatsGridBlockSelect<T>;
+        featureGrid?: T | FeatureGridBlockSelect<T>;
+        programGrid?: T | ProgramGridBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
+        donationCampaign?: T | DonationCampaignBlockSelect<T>;
       };
   meta?:
     | T
@@ -1245,6 +1420,131 @@ export interface OrgStructureBlockSelect<T extends boolean = true> {
         order?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsGridBlock_select".
+ */
+export interface StatsGridBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGridBlock_select".
+ */
+export interface FeatureGridBlockSelect<T extends boolean = true> {
+  sectionLabel?: T;
+  heading?: T;
+  description?: T;
+  features?:
+    | T
+    | {
+        badge?: T;
+        badgeStyle?: T;
+        heading?: T;
+        description?: T;
+        icon?: T;
+        colSpan?: T;
+        tags?:
+          | T
+          | {
+              tag?: T;
+              id?: T;
+            };
+        footnote?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgramGridBlock_select".
+ */
+export interface ProgramGridBlockSelect<T extends boolean = true> {
+  sectionLabel?: T;
+  heading?: T;
+  programs?:
+    | T
+    | {
+        code?: T;
+        badge?: T;
+        badgeStyle?: T;
+        heading?: T;
+        description?: T;
+        specs?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        linkLabel?: T;
+        linkUrl?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  sectionLabel?: T;
+  quote?: T;
+  personName?: T;
+  personTitle?: T;
+  personCredentials?: T;
+  photo?: T;
+  orgName?: T;
+  orgDescription?: T;
+  linkLabel?: T;
+  linkUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DonationCampaignBlock_select".
+ */
+export interface DonationCampaignBlockSelect<T extends boolean = true> {
+  badge?: T;
+  heading?: T;
+  description?: T;
+  targetAmount?: T;
+  collectedAmount?: T;
+  donorCount?: T;
+  auditInfo?: T;
+  donationOptions?:
+    | T
+    | {
+        amount?: T;
+        isHighlighted?: T;
+        id?: T;
+      };
+  bankInfo?: T;
+  ctaLabel?: T;
+  ctaUrl?: T;
+  secondaryCtaLabel?: T;
+  secondaryCtaUrl?: T;
   id?: T;
   blockName?: T;
 }
