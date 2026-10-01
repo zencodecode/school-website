@@ -222,7 +222,18 @@ export interface Page {
      */
     autoplayInterval?: number | null;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | OrgStructureBlock
+    | StatsGridBlock
+    | FeatureGridBlock
+    | ProgramGridBlock
+    | TestimonialBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -796,6 +807,146 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OrgStructureBlock".
+ */
+export interface OrgStructureBlock {
+  title?: string | null;
+  members?:
+    | {
+        name: string;
+        position: string;
+        photo?: (string | null) | Media;
+        order?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'orgStructure';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsGridBlock".
+ */
+export interface StatsGridBlock {
+  items?:
+    | {
+        label: string;
+        value: string;
+        description?: string | null;
+        /**
+         * Material Symbols icon name, e.g. groups, menu_book, verified, school
+         */
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'statsGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGridBlock".
+ */
+export interface FeatureGridBlock {
+  sectionLabel?: string | null;
+  heading: string;
+  description?: string | null;
+  features?:
+    | {
+        badge?: string | null;
+        badgeStyle?: ('primary' | 'secondary' | 'gold') | null;
+        heading: string;
+        description: string;
+        /**
+         * Material Symbols icon name (optional)
+         */
+        icon?: string | null;
+        colSpan?: ('half' | 'wide' | 'narrow') | null;
+        tags?:
+          | {
+              tag: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Optional bottom section with label and value
+         */
+        footnote?: {
+          label?: string | null;
+          value?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgramGridBlock".
+ */
+export interface ProgramGridBlock {
+  sectionLabel?: string | null;
+  heading: string;
+  programs?:
+    | {
+        /**
+         * Short code like "PROG-01"
+         */
+        code?: string | null;
+        /**
+         * Badge text like "Full Boarding"
+         */
+        badge?: string | null;
+        badgeStyle?: ('default' | 'gold') | null;
+        heading: string;
+        description: string;
+        specs?:
+          | {
+              label: string;
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        linkLabel?: string | null;
+        /**
+         * URL or anchor link, e.g. /programs or #section-id
+         */
+        linkUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'programGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock".
+ */
+export interface TestimonialBlock {
+  sectionLabel?: string | null;
+  /**
+   * The main quote text. Use the pipe character | to mark a highlighted phrase (e.g. "text |highlighted part| more text")
+   */
+  quote: string;
+  personName: string;
+  personTitle: string;
+  personCredentials?: string | null;
+  photo?: (string | null) | Media;
+  orgName?: string | null;
+  orgDescription?: string | null;
+  linkLabel?: string | null;
+  linkUrl?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonial';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1111,6 +1262,11 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        orgStructure?: T | OrgStructureBlockSelect<T>;
+        statsGrid?: T | StatsGridBlockSelect<T>;
+        featureGrid?: T | FeatureGridBlockSelect<T>;
+        programGrid?: T | ProgramGridBlockSelect<T>;
+        testimonial?: T | TestimonialBlockSelect<T>;
       };
   meta?:
     | T
@@ -1207,6 +1363,122 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "OrgStructureBlock_select".
+ */
+export interface OrgStructureBlockSelect<T extends boolean = true> {
+  title?: T;
+  members?:
+    | T
+    | {
+        name?: T;
+        position?: T;
+        photo?: T;
+        order?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsGridBlock_select".
+ */
+export interface StatsGridBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureGridBlock_select".
+ */
+export interface FeatureGridBlockSelect<T extends boolean = true> {
+  sectionLabel?: T;
+  heading?: T;
+  description?: T;
+  features?:
+    | T
+    | {
+        badge?: T;
+        badgeStyle?: T;
+        heading?: T;
+        description?: T;
+        icon?: T;
+        colSpan?: T;
+        tags?:
+          | T
+          | {
+              tag?: T;
+              id?: T;
+            };
+        footnote?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgramGridBlock_select".
+ */
+export interface ProgramGridBlockSelect<T extends boolean = true> {
+  sectionLabel?: T;
+  heading?: T;
+  programs?:
+    | T
+    | {
+        code?: T;
+        badge?: T;
+        badgeStyle?: T;
+        heading?: T;
+        description?: T;
+        specs?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        linkLabel?: T;
+        linkUrl?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialBlock_select".
+ */
+export interface TestimonialBlockSelect<T extends boolean = true> {
+  sectionLabel?: T;
+  quote?: T;
+  personName?: T;
+  personTitle?: T;
+  personCredentials?: T;
+  photo?: T;
+  orgName?: T;
+  orgDescription?: T;
+  linkLabel?: T;
+  linkUrl?: T;
   id?: T;
   blockName?: T;
 }
@@ -1660,6 +1932,26 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
+  /**
+   * Logo for light background display. Recommended: SVG or transparent PNG, width 200-400px.
+   */
+  logo?: (string | null) | Media;
+  /**
+   * Logo for dark background display (transparent header, footer). If left empty, the primary logo will be used.
+   */
+  logoDark?: (string | null) | Media;
+  /**
+   * Small icon displayed in browser tabs. Upload a 32x32px .ico file. Only files in ICO format are accepted.
+   */
+  faviconIco?: (string | null) | Media;
+  /**
+   * SVG favicon for modern browsers (Chrome, Firefox, Edge). Upload a .svg file. Only files in SVG format are accepted.
+   */
+  faviconSvg?: (string | null) | Media;
+  /**
+   * Displayed as a fallback if logo is not uploaded, and used as the logo alt text.
+   */
+  siteName?: string | null;
   navItems?:
     | {
         link: {
@@ -1677,6 +1969,27 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        style?: ('link' | 'dropdown') | null;
+        subNavItems?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1717,6 +2030,11 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  logoDark?: T;
+  faviconIco?: T;
+  faviconSvg?: T;
+  siteName?: T;
   navItems?:
     | T
     | {
@@ -1728,6 +2046,21 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+            };
+        style?: T;
+        subNavItems?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };

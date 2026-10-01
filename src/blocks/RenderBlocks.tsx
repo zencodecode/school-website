@@ -5,15 +5,25 @@ import type { Page } from '@/payload-types'
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
+import { FeatureGridBlock } from '@/blocks/FeatureGrid/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { OrgStructureBlock } from '@/blocks/OrgStructure/Component'
+import { ProgramGridBlock } from '@/blocks/ProgramGrid/Component'
+import { StatsGridBlock } from '@/blocks/StatsGrid/Component'
+import { TestimonialBlock } from '@/blocks/Testimonial/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
+  featureGrid: FeatureGridBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  orgStructure: OrgStructureBlock,
+  programGrid: ProgramGridBlock,
+  statsGrid: StatsGridBlock,
+  testimonial: TestimonialBlock,
 }
 
 export const RenderBlocks: React.FC<{

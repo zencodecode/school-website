@@ -6,8 +6,11 @@ import {
   ParagraphFeature,
   lexicalEditor,
   UnderlineFeature,
+  TextStateFeature,
+  AlignFeature,
   type LinkFields,
 } from '@payloadcms/richtext-lexical'
+import { textStateConfig } from '@/fields/textStateConfig'
 
 export const defaultLexical = lexicalEditor({
   features: [
@@ -43,5 +46,9 @@ export const defaultLexical = lexicalEditor({
         ]
       },
     }),
+    TextStateFeature({
+      state: textStateConfig,
+    }),
+    AlignFeature(),
   ],
 })

@@ -12,6 +12,7 @@ public/media/
 
 public/robots.txt
 public/sitemap*.xml
+public/images/
 
 
 # Playwright
@@ -20,3 +21,5 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+.agent/

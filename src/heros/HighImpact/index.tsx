@@ -64,12 +64,16 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 
       {/* Foreground content overlays the media. `pointer-events-none` lets clicks
           over empty areas fall through to the carousel controls; interactive
-          children re-enable pointer events. */}
-      <div className="container mb-8 z-10 relative flex items-center justify-center pointer-events-none">
-        <div className="max-w-[36.5rem] md:text-center">
-          {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+          children re-enable pointer events.
+          
+          Alignment and text size are driven by the Lexical rich text editor —
+          the `format` property on the root node determines text-align, and 
+          heading tags (h1–h4) are styled by the prose typography plugin. */}
+      <div className="container mb-8 z-10 relative flex items-end pointer-events-none">
+        <div className="w-full">
+          {richText && <RichText className="mb-6" data={richText} enableGutter={false} enableProse={false} />}
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex md:justify-center gap-4 pointer-events-auto">
+            <ul className="flex gap-4 pointer-events-auto">
               {links.map(({ link }, i) => {
                 return (
                   <li key={i}>
