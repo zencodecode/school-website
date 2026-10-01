@@ -233,7 +233,6 @@ export interface Page {
     | FeatureGridBlock
     | ProgramGridBlock
     | TestimonialBlock
-    | DonationCampaignBlock
   )[];
   meta?: {
     title?: string | null;
@@ -948,43 +947,6 @@ export interface TestimonialBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DonationCampaignBlock".
- */
-export interface DonationCampaignBlock {
-  badge?: string | null;
-  heading: string;
-  description?: string | null;
-  /**
-   * Target amount in IDR (number only, e.g. 500000000)
-   */
-  targetAmount: number;
-  /**
-   * Collected amount in IDR
-   */
-  collectedAmount: number;
-  donorCount?: number | null;
-  auditInfo?: string | null;
-  donationOptions?:
-    | {
-        /**
-         * Amount in IDR
-         */
-        amount: number;
-        isHighlighted?: boolean | null;
-        id?: string | null;
-      }[]
-    | null;
-  bankInfo?: string | null;
-  ctaLabel?: string | null;
-  ctaUrl?: string | null;
-  secondaryCtaLabel?: string | null;
-  secondaryCtaUrl?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'donationCampaign';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1305,7 +1267,6 @@ export interface PagesSelect<T extends boolean = true> {
         featureGrid?: T | FeatureGridBlockSelect<T>;
         programGrid?: T | ProgramGridBlockSelect<T>;
         testimonial?: T | TestimonialBlockSelect<T>;
-        donationCampaign?: T | DonationCampaignBlockSelect<T>;
       };
   meta?:
     | T
@@ -1518,33 +1479,6 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
   orgDescription?: T;
   linkLabel?: T;
   linkUrl?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DonationCampaignBlock_select".
- */
-export interface DonationCampaignBlockSelect<T extends boolean = true> {
-  badge?: T;
-  heading?: T;
-  description?: T;
-  targetAmount?: T;
-  collectedAmount?: T;
-  donorCount?: T;
-  auditInfo?: T;
-  donationOptions?:
-    | T
-    | {
-        amount?: T;
-        isHighlighted?: T;
-        id?: T;
-      };
-  bankInfo?: T;
-  ctaLabel?: T;
-  ctaUrl?: T;
-  secondaryCtaLabel?: T;
-  secondaryCtaUrl?: T;
   id?: T;
   blockName?: T;
 }
@@ -1998,6 +1932,26 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
+  /**
+   * Logo for light background display. Recommended: SVG or transparent PNG, width 200-400px.
+   */
+  logo?: (string | null) | Media;
+  /**
+   * Logo for dark background display (transparent header, footer). If left empty, the primary logo will be used.
+   */
+  logoDark?: (string | null) | Media;
+  /**
+   * Small icon displayed in browser tabs. Upload a 32x32px .ico file. Only files in ICO format are accepted.
+   */
+  faviconIco?: (string | null) | Media;
+  /**
+   * SVG favicon for modern browsers (Chrome, Firefox, Edge). Upload a .svg file. Only files in SVG format are accepted.
+   */
+  faviconSvg?: (string | null) | Media;
+  /**
+   * Displayed as a fallback if logo is not uploaded, and used as the logo alt text.
+   */
+  siteName?: string | null;
   navItems?:
     | {
         link: {
@@ -2076,6 +2030,11 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  logoDark?: T;
+  faviconIco?: T;
+  faviconSvg?: T;
+  siteName?: T;
   navItems?:
     | T
     | {

@@ -29,7 +29,7 @@ export const ProgramGridBlock: React.FC<ProgramGridProps & { id?: string }> = (p
                 heading: programHeading,
                 description,
                 specs,
-                linkLabel = 'Detail Kurikulum',
+                linkLabel = 'Curriculum Details',
                 linkUrl,
               } = program
 
