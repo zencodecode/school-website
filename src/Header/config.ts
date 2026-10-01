@@ -26,7 +26,7 @@ export const Header: GlobalConfig = {
               label: 'Logo (Light Background)',
               admin: {
                 description:
-                  'Logo untuk tampilan di background terang. Rekomendasi: SVG atau PNG transparan, lebar 200-400px.',
+                  'Logo for light background display. Recommended: SVG or transparent PNG, width 200-400px.',
                 width: '50%',
               },
             },
@@ -37,7 +37,7 @@ export const Header: GlobalConfig = {
               label: 'Logo (Dark Background)',
               admin: {
                 description:
-                  'Logo untuk tampilan di background gelap (header transparan, footer). Jika kosong, logo utama akan digunakan.',
+                  'Logo for dark background display (transparent header, footer). If left empty, the primary logo will be used.',
                 width: '50%',
               },
             },
@@ -56,7 +56,7 @@ export const Header: GlobalConfig = {
               },
               admin: {
                 description:
-                  'Ikon kecil yang muncul di tab browser. Upload file .ico berukuran 32x32px. Hanya file berformat ICO yang diterima.',
+                  'Small icon displayed in browser tabs. Upload a 32x32px .ico file. Only files in ICO format are accepted.',
                 width: '50%',
               },
             },
@@ -70,7 +70,7 @@ export const Header: GlobalConfig = {
               },
               admin: {
                 description:
-                  'Favicon versi SVG untuk browser modern (Chrome, Firefox, Edge). Upload file .svg. Hanya file berformat SVG yang diterima.',
+                  'SVG favicon for modern browsers (Chrome, Firefox, Edge). Upload a .svg file. Only files in SVG format are accepted.',
                 width: '50%',
               },
             },
@@ -83,7 +83,7 @@ export const Header: GlobalConfig = {
           defaultValue: 'School Website',
           admin: {
             description:
-              'Ditampilkan sebagai fallback jika logo belum diupload, dan sebagai alt text logo.',
+              'Displayed as a fallback if logo is not uploaded, and used as the logo alt text.',
           },
         },
       ],
