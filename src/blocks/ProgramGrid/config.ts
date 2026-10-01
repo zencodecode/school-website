@@ -90,7 +90,7 @@ export const ProgramGrid: Block = {
         {
           name: 'linkLabel',
           type: 'text',
-          defaultValue: 'Detail Kurikulum',
+          defaultValue: 'Curriculum Details',
         },
         {
           name: 'linkUrl',

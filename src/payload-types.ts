@@ -1933,23 +1933,23 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Header {
   id: string;
   /**
-   * Logo untuk tampilan di background terang. Rekomendasi: SVG atau PNG transparan, lebar 200-400px.
+   * Logo for light background display. Recommended: SVG or transparent PNG, width 200-400px.
    */
   logo?: (string | null) | Media;
   /**
-   * Logo untuk tampilan di background gelap (header transparan, footer). Jika kosong, logo utama akan digunakan.
+   * Logo for dark background display (transparent header, footer). If left empty, the primary logo will be used.
    */
   logoDark?: (string | null) | Media;
   /**
-   * Ikon kecil yang muncul di tab browser. Upload file .ico berukuran 32x32px. Hanya file berformat ICO yang diterima.
+   * Small icon displayed in browser tabs. Upload a 32x32px .ico file. Only files in ICO format are accepted.
    */
   faviconIco?: (string | null) | Media;
   /**
-   * Favicon versi SVG untuk browser modern (Chrome, Firefox, Edge). Upload file .svg. Hanya file berformat SVG yang diterima.
+   * SVG favicon for modern browsers (Chrome, Firefox, Edge). Upload a .svg file. Only files in SVG format are accepted.
    */
   faviconSvg?: (string | null) | Media;
   /**
-   * Ditampilkan sebagai fallback jika logo belum diupload, dan sebagai alt text logo.
+   * Displayed as a fallback if logo is not uploaded, and used as the logo alt text.
    */
   siteName?: string | null;
   navItems?:
