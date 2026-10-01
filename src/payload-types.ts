@@ -233,7 +233,6 @@ export interface Page {
     | FeatureGridBlock
     | ProgramGridBlock
     | TestimonialBlock
-    | DonationCampaignBlock
   )[];
   meta?: {
     title?: string | null;
@@ -948,43 +947,6 @@ export interface TestimonialBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DonationCampaignBlock".
- */
-export interface DonationCampaignBlock {
-  badge?: string | null;
-  heading: string;
-  description?: string | null;
-  /**
-   * Target amount in IDR (number only, e.g. 500000000)
-   */
-  targetAmount: number;
-  /**
-   * Collected amount in IDR
-   */
-  collectedAmount: number;
-  donorCount?: number | null;
-  auditInfo?: string | null;
-  donationOptions?:
-    | {
-        /**
-         * Amount in IDR
-         */
-        amount: number;
-        isHighlighted?: boolean | null;
-        id?: string | null;
-      }[]
-    | null;
-  bankInfo?: string | null;
-  ctaLabel?: string | null;
-  ctaUrl?: string | null;
-  secondaryCtaLabel?: string | null;
-  secondaryCtaUrl?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'donationCampaign';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1305,7 +1267,6 @@ export interface PagesSelect<T extends boolean = true> {
         featureGrid?: T | FeatureGridBlockSelect<T>;
         programGrid?: T | ProgramGridBlockSelect<T>;
         testimonial?: T | TestimonialBlockSelect<T>;
-        donationCampaign?: T | DonationCampaignBlockSelect<T>;
       };
   meta?:
     | T
@@ -1518,33 +1479,6 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
   orgDescription?: T;
   linkLabel?: T;
   linkUrl?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DonationCampaignBlock_select".
- */
-export interface DonationCampaignBlockSelect<T extends boolean = true> {
-  badge?: T;
-  heading?: T;
-  description?: T;
-  targetAmount?: T;
-  collectedAmount?: T;
-  donorCount?: T;
-  auditInfo?: T;
-  donationOptions?:
-    | T
-    | {
-        amount?: T;
-        isHighlighted?: T;
-        id?: T;
-      };
-  bankInfo?: T;
-  ctaLabel?: T;
-  ctaUrl?: T;
-  secondaryCtaLabel?: T;
-  secondaryCtaUrl?: T;
   id?: T;
   blockName?: T;
 }

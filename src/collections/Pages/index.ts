@@ -5,7 +5,6 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
-import { DonationCampaign } from '../../blocks/DonationCampaign/config'
 import { FeatureGrid } from '../../blocks/FeatureGrid/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
@@ -89,7 +88,6 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeatureGrid,
                 ProgramGrid,
                 Testimonial,
-                DonationCampaign,
               ],
               required: true,
               admin: {
