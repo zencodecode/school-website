@@ -23,8 +23,8 @@ export const FeatureGridBlock: React.FC<FeatureGridProps & { id?: string }> = (p
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border pb-12 gap-6">
           <div className="max-w-2xl">
             {sectionLabel && (
-              <div className="font-mono text-label-mono text-primary font-semibold tracking-widest uppercase mb-4">
-                // {sectionLabel}
+              <div className="text-label-mono text-primary font-semibold tracking-widest uppercase mb-4">
+                {sectionLabel}
               </div>
             )}
             <h2 className="font-headline text-headline-xl font-bold">{heading}</h2>
@@ -52,7 +52,7 @@ export const FeatureGridBlock: React.FC<FeatureGridProps & { id?: string }> = (p
                   <div className="flex items-start justify-between">
                     {feature.badge ? (
                       <span
-                        className={`font-mono text-xs px-2.5 py-1 rounded-full font-semibold ${badgeClass}`}
+                        className={`text-xs px-2.5 py-1 rounded-full font-semibold ${badgeClass}`}
                       >
                         {feature.badge}
                       </span>
@@ -89,7 +89,7 @@ export const FeatureGridBlock: React.FC<FeatureGridProps & { id?: string }> = (p
 
                 {feature.footnote &&
                   (feature.footnote.label || feature.footnote.value) && (
-                    <div className="border-t border-border mt-8 pt-6 flex items-center justify-between font-mono text-xs text-muted-foreground">
+                    <div className="border-t border-border mt-8 pt-6 flex items-center justify-between text-xs text-muted-foreground">
                       <span>{feature.footnote.label}</span>
                       <span className="font-semibold">{feature.footnote.value}</span>
                     </div>

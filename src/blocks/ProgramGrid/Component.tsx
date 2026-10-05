@@ -10,8 +10,8 @@ export const ProgramGridBlock: React.FC<ProgramGridProps & { id?: string }> = (p
         {/* Section Header */}
         <div className="flex flex-col gap-4 border-b border-border pb-8">
           {sectionLabel && (
-            <div className="font-mono text-label-mono text-primary font-semibold tracking-widest uppercase">
-              // {sectionLabel}
+            <div className="text-label-mono text-primary font-semibold tracking-widest uppercase">
+              {sectionLabel}
             </div>
           )}
           <h2 className="font-headline text-headline-xl font-bold">{heading}</h2>
@@ -42,11 +42,11 @@ export const ProgramGridBlock: React.FC<ProgramGridProps & { id?: string }> = (p
                     {/* Code + Badge header */}
                     <div className="flex items-center justify-between pb-3 border-b border-border">
                       {code && (
-                        <span className="font-mono text-xs text-primary font-bold">{code}</span>
+                        <span className="text-xs text-primary font-bold">{code}</span>
                       )}
                       {badge && (
                         <span
-                          className={`font-mono text-[11px] px-2 py-0.5 rounded ${
+                          className={`text-[11px] px-2 py-0.5 rounded ${
                             badgeStyle === 'gold'
                               ? 'bg-gold-badge-bg text-amber-700'
                               : 'bg-muted text-muted-foreground'
@@ -67,7 +67,7 @@ export const ProgramGridBlock: React.FC<ProgramGridProps & { id?: string }> = (p
 
                     {/* Specs table */}
                     {specs && specs.length > 0 && (
-                      <div className="flex flex-col gap-2 pt-2 font-mono text-xs text-muted-foreground">
+                      <div className="flex flex-col gap-2 pt-2 text-xs text-muted-foreground">
                         {specs.map((spec, specIndex) => (
                           <div
                             key={spec.id || specIndex}
@@ -98,7 +98,7 @@ export const ProgramGridBlock: React.FC<ProgramGridProps & { id?: string }> = (p
                     <div className="border-t border-border mt-6 pt-4">
                       <a
                         href={linkUrl}
-                        className="inline-flex items-center justify-between w-full font-mono text-xs font-semibold text-primary group-hover:translate-x-0.5 transition-transform"
+                        className="inline-flex items-center justify-between w-full text-xs font-semibold text-primary group-hover:translate-x-0.5 transition-transform"
                       >
                         <span>{linkLabel}</span>
                         <span className="material-symbols-outlined text-[16px]">east</span>
