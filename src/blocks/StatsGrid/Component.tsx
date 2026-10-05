@@ -13,8 +13,8 @@ export const StatsGridBlock: React.FC<StatsGridProps & { id?: string }> = (props
             className="flex flex-col justify-between gap-3 p-6 hover:bg-muted/30 transition-colors rounded-lg"
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-label-mono text-muted-foreground uppercase tracking-wider">
-                // {item.label}
+              <span className="text-label-mono text-muted-foreground uppercase tracking-wider">
+                {item.label}
               </span>
               {item.icon && (
                 <span className="material-symbols-outlined text-primary text-[20px]">

@@ -46,6 +46,9 @@ const config = {
             {
               '--tw-prose-body': 'var(--text)',
               '--tw-prose-headings': 'var(--text)',
+              'h1, h2, h3, h4, h5, h6': {
+                fontFamily: 'var(--font-headline)',
+              },
               h1: {
                 fontWeight: 'normal',
                 marginBottom: '0.25em',

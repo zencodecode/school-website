@@ -52,7 +52,7 @@ export const TestimonialBlock: React.FC<TestimonialProps & { id?: string }> = (p
               )}
 
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-                <p className="font-mono text-[10px] text-primary uppercase tracking-wider mb-1">
+                <p className="text-[10px] text-primary uppercase tracking-wider mb-1">
                   {personTitle}
                 </p>
                 <p className="font-headline font-bold text-white text-lg leading-tight">
@@ -76,8 +76,8 @@ export const TestimonialBlock: React.FC<TestimonialProps & { id?: string }> = (p
                 format_quote
               </span>
               {sectionLabel && (
-                <span className="font-mono text-label-mono text-gray-400 uppercase tracking-widest">
-                  // {sectionLabel}
+                <span className="text-label-mono text-gray-400 uppercase tracking-widest">
+                  {sectionLabel}
                 </span>
               )}
             </div>
@@ -91,14 +91,14 @@ export const TestimonialBlock: React.FC<TestimonialProps & { id?: string }> = (p
                 <div>
                   {orgName && <p className="font-semibold text-white">{orgName}</p>}
                   {orgDescription && (
-                    <p className="text-[11px] font-mono text-gray-400 mt-0.5">{orgDescription}</p>
+                    <p className="text-[11px] text-gray-400 mt-0.5">{orgDescription}</p>
                   )}
                 </div>
 
                 {linkUrl && (
                   <a
                     href={linkUrl}
-                    className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-primary hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-white transition-colors"
                   >
                     <span>{linkLabel || 'Learn More'}</span>
                     <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
