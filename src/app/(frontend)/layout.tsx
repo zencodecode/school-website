@@ -24,7 +24,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-plus-jakarta-sans',
   display: 'swap',
-  weight: ['500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
