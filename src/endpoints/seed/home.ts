@@ -48,7 +48,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Payload Website Template',
+                  text: 'Ponpes Abu Bakar Sidik',
                   version: 1,
                 },
               ],
@@ -667,9 +667,9 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
       },
     ],
     meta: {
-      description: 'An open-source website built with Payload and Next.js.',
+      description: 'Website resmi Pondok Pesantren Abu Bakar Sidik.',
       image: heroImage.id,
-      title: 'Payload Website Template',
+      title: 'Ponpes Abu Bakar Sidik',
     },
     title: 'Home',
   }
