@@ -13,9 +13,10 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { DEFAULT_SITE_NAME } from '@/utilities/getSiteName'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title ? `${doc.title} | ${DEFAULT_SITE_NAME}` : DEFAULT_SITE_NAME
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
@@ -90,10 +91,16 @@ export const plugins: Plugin[] = [
       },
     },
   }),
-  vercelBlobStorage({
-    collections: {
-      media: true,
-    },
-    token: process.env.BLOB_READ_WRITE_TOKEN || '',
-  }),
+  // Vercel Blob Storage — hanya aktif jika token tersedia (deployment di Vercel)
+  // Di VPS, media otomatis disimpan ke local disk oleh Payload
+  ...(process.env.BLOB_READ_WRITE_TOKEN
+    ? [
+        vercelBlobStorage({
+          collections: {
+            media: true,
+          },
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        }),
+      ]
+    : []),
 ]
