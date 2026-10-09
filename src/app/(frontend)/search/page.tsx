@@ -7,6 +7,7 @@ import React from 'react'
 import { Search } from '@/search/Component'
 import PageClient from './page.client'
 import { CardPostData } from '@/components/Card'
+import { DEFAULT_SITE_NAME } from '@/utilities/getSiteName'
 
 type Args = {
   searchParams: Promise<{
@@ -83,6 +84,6 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
 
 export function generateMetadata(): Metadata {
   return {
-    title: `Payload Website Template Search`,
+    title: `Pencarian | ${DEFAULT_SITE_NAME}`,
   }
 }

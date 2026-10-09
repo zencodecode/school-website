@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # ============================================
+  # Next.js + Payload CMS Application
+  # ============================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ponpes-abs-app
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      - NODE_ENV=production
+      - HOSTNAME=0.0.0.0
+      - PORT=3000
+    depends_on:
+      mongo:
+        condition: service_started
+    volumes:
+      # Media uploads — persistent storage
+      - media_data:/app/media
+      - media_data:/app/public/media
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ============================================
+  # MongoDB Database
+  # ============================================
+  mongo:
+    image: mongo:7
+    container_name: ponpes-abs-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:?MONGO_PASSWORD harus diisi di .env.production}
+    volumes:
+      # Database data — persistent storage
+      - mongo_data:/data/db
+      # Backup directory
+      - mongo_backup:/backup
+    networks:
+      - internal
+    # MongoDB tidak perlu expose port ke host — hanya accessible dari internal network
+    # Uncomment baris berikut jika perlu akses langsung (debugging):
+    # ports:
+    #   - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # ============================================
+  # Nginx Reverse Proxy
+  # ============================================
+  nginx:
+    image: nginx:alpine
+    container_name: ponpes-abs-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      app:
+        condition: service_started
+    networks:
+      - internal
+
+# ============================================
+# Persistent Volumes
+# ============================================
+volumes:
+  mongo_data:
+    driver: local
+  mongo_backup:
+    driver: local
+  media_data:
+    driver: local
+
+# ============================================
+# Internal Network
+# ============================================
+networks:
+  internal:
+    driver: bridge

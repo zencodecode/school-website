@@ -30,7 +30,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   const logo = typeof data.logo === 'object' ? (data.logo as Media) : null
   const logoDark = typeof data.logoDark === 'object' ? (data.logoDark as Media) : null
-  const siteName = data.siteName || 'School Website'
+  const siteName = data.siteName || 'Ponpes Abu Bakar Sidik'
 
   return (
     <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>

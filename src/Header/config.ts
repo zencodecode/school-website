@@ -80,7 +80,7 @@ export const Header: GlobalConfig = {
           name: 'siteName',
           type: 'text',
           label: 'Site Name',
-          defaultValue: 'School Website',
+          defaultValue: 'Ponpes Abu Bakar Sidik',
           admin: {
             description:
               'Displayed as a fallback if logo is not uploaded, and used as the logo alt text.',
