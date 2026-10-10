@@ -1,6 +1,6 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
 
-const DEFAULT_SITE_NAME = 'Ponpes Abu Bakar Sidik'
+const DEFAULT_SITE_NAME = 'Ponpes Abu Bakar Shiddiq'
 
 /**
  * Mengambil nama situs dari Header global config (cached).

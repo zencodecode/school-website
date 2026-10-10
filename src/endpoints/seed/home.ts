@@ -48,7 +48,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                   format: 0,
                   mode: 'normal',
                   style: '',
-                  text: 'Ponpes Abu Bakar Sidik',
+                  text: 'Ponpes Abu Bakar Shiddiq',
                   version: 1,
                 },
               ],
@@ -667,9 +667,9 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
       },
     ],
     meta: {
-      description: 'Website resmi Pondok Pesantren Abu Bakar Sidik.',
+      description: 'Website resmi Pondok Pesantren Abu Bakar Shiddiq.',
       image: heroImage.id,
-      title: 'Ponpes Abu Bakar Sidik',
+      title: 'Ponpes Abu Bakar Shiddiq',
     },
     title: 'Home',
   }

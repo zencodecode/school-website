@@ -42,7 +42,7 @@ describe('getSiteName', () => {
     expect(result).toBe(DEFAULT_SITE_NAME)
   })
 
-  it('DEFAULT_SITE_NAME adalah Ponpes Abu Bakar Sidik', () => {
-    expect(DEFAULT_SITE_NAME).toBe('Ponpes Abu Bakar Sidik')
+  it('DEFAULT_SITE_NAME adalah Ponpes Abu Bakar Shiddiq', () => {
+    expect(DEFAULT_SITE_NAME).toBe('Ponpes Abu Bakar Shiddiq')
   })
 })
