@@ -17,7 +17,7 @@ export async function Footer() {
   const logoDark = typeof headerData?.logoDark === 'object' ? (headerData.logoDark as Media) : null
   const logo = typeof headerData?.logo === 'object' ? (headerData.logo as Media) : null
   const footerLogo = logoDark || logo
-  const siteName = headerData?.siteName || 'Ponpes Abu Bakar Sidik'
+  const siteName = headerData?.siteName || 'Ponpes Abu Bakar Shiddiq'
 
   return (
     <footer className="mt-auto border-t border-border bg-black dark:bg-card text-white">
