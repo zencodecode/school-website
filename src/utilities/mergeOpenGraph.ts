@@ -5,7 +5,7 @@ import { DEFAULT_SITE_NAME } from '@/utilities/getSiteName'
 
 const defaultOpenGraph: Metadata['openGraph'] = {
   type: 'website',
-  description: 'Website resmi Pondok Pesantren Abu Bakar Sidik.',
+  description: 'Website resmi Pondok Pesantren Abu Bakar Shiddiq.',
   images: [
     {
       url: `${getServerSideURL()}/website-template-OG.webp`,
