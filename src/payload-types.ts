@@ -1941,11 +1941,11 @@ export interface Header {
    */
   logoDark?: (string | null) | Media;
   /**
-   * Small icon displayed in browser tabs. Upload a 32x32px .ico file. Only files in ICO format are accepted.
+   * Small icon displayed in browser tabs. Upload a 32x32px .ico file.
    */
   faviconIco?: (string | null) | Media;
   /**
-   * SVG favicon for modern browsers (Chrome, Firefox, Edge). Upload a .svg file. Only files in SVG format are accepted.
+   * SVG favicon for modern browsers (Chrome, Firefox, Edge). Upload a .svg file.
    */
   faviconSvg?: (string | null) | Media;
   /**

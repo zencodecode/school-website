@@ -51,12 +51,9 @@ export const Header: GlobalConfig = {
               type: 'upload',
               relationTo: 'media',
               label: 'Favicon (ICO)',
-              filterOptions: {
-                mimeType: { equals: 'image/x-icon' },
-              },
               admin: {
                 description:
-                  'Small icon displayed in browser tabs. Upload a 32x32px .ico file. Only files in ICO format are accepted.',
+                  'Small icon displayed in browser tabs. Upload a 32x32px .ico file.',
                 width: '50%',
               },
             },
@@ -65,12 +62,9 @@ export const Header: GlobalConfig = {
               type: 'upload',
               relationTo: 'media',
               label: 'Favicon (SVG)',
-              filterOptions: {
-                mimeType: { equals: 'image/svg+xml' },
-              },
               admin: {
                 description:
-                  'SVG favicon for modern browsers (Chrome, Firefox, Edge). Upload a .svg file. Only files in SVG format are accepted.',
+                  'SVG favicon for modern browsers (Chrome, Firefox, Edge). Upload a .svg file.',
                 width: '50%',
               },
             },
