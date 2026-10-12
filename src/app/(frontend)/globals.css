@@ -28,6 +28,13 @@
 @source inline("lg:col-span-6");
 @source inline("lg:col-span-8");
 @source inline("lg:col-span-12");
+@source inline("lg:col-start-3");
+@source inline("lg:col-start-4");
+@source inline("lg:col-start-5");
+@source inline("lg:col-start-7");
+@source inline("lg:col-start-9");
+@source inline("md:col-start-2");
+@source inline("md:col-start-3");
 @source inline("border-border");
 @source inline("bg-card");
 @source inline("border-error");
@@ -88,82 +95,82 @@
 }
 
 :root {
-  /* ── Emerald-green + warm-gold palette (light mode) ── */
-  --background: oklch(98.5% 0.007 120deg);
-  --foreground: oklch(22% 0.02 155deg);
-  --card: oklch(97% 0.01 120deg);
-  --card-foreground: oklch(22% 0.02 155deg);
-  --popover: oklch(98.5% 0.007 120deg);
-  --popover-foreground: oklch(22% 0.02 155deg);
-  --primary: oklch(48% 0.12 155deg);
-  --primary-foreground: oklch(98% 0.007 120deg);
-  --secondary: oklch(94% 0.03 155deg);
-  --secondary-foreground: oklch(30% 0.06 155deg);
-  --muted: oklch(95% 0.015 130deg);
-  --muted-foreground: oklch(50% 0.03 150deg);
-  --accent: oklch(80% 0.12 85deg);
-  --accent-foreground: oklch(28% 0.05 85deg);
+  /* ── Royal Emerald & Warm Islamic Gold (light mode) ── */
+  --background: oklch(99.2% 0.003 150deg);
+  --foreground: oklch(20% 0.02 165deg);
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(20% 0.02 165deg);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(20% 0.02 165deg);
+  --primary: oklch(44% 0.145 158deg);
+  --primary-foreground: oklch(99% 0 0);
+  --secondary: oklch(95.5% 0.02 155deg);
+  --secondary-foreground: oklch(25% 0.08 158deg);
+  --muted: oklch(96.5% 0.008 150deg);
+  --muted-foreground: oklch(48% 0.025 160deg);
+  --accent: oklch(76% 0.15 78deg);
+  --accent-foreground: oklch(24% 0.08 75deg);
   --destructive: oklch(57.7% 0.245 27.325deg);
-  --destructive-foreground: oklch(57.7% 0.245 27.325deg);
-  --border: oklch(90% 0.02 145deg);
-  --input: oklch(90% 0.02 145deg);
-  --ring: oklch(48% 0.12 155deg);
-  --chart-1: oklch(48% 0.12 155deg);
+  --destructive-foreground: oklch(99% 0 0);
+  --border: oklch(91.5% 0.012 155deg);
+  --input: oklch(91.5% 0.012 155deg);
+  --ring: oklch(44% 0.145 158deg);
+  --chart-1: oklch(44% 0.145 158deg);
   --chart-2: oklch(68% 0.10 140deg);
-  --chart-3: oklch(80% 0.12 85deg);
+  --chart-3: oklch(76% 0.15 78deg);
   --chart-4: oklch(58% 0.10 200deg);
   --chart-5: oklch(72% 0.15 75deg);
-  --radius: 0.625rem;
-  --sidebar: oklch(96.5% 0.02 150deg);
-  --sidebar-foreground: oklch(22% 0.02 155deg);
-  --sidebar-primary: oklch(48% 0.12 155deg);
-  --sidebar-primary-foreground: oklch(98% 0.007 120deg);
-  --sidebar-accent: oklch(80% 0.12 85deg);
-  --sidebar-accent-foreground: oklch(28% 0.05 85deg);
-  --sidebar-border: oklch(90% 0.02 145deg);
-  --sidebar-ring: oklch(48% 0.12 155deg);
-  --success: oklch(72% 0.12 155deg);
-  --warning: oklch(82% 0.12 85deg);
+  --radius: 0.75rem;
+  --sidebar: oklch(98% 0.008 150deg);
+  --sidebar-foreground: oklch(20% 0.02 165deg);
+  --sidebar-primary: oklch(44% 0.145 158deg);
+  --sidebar-primary-foreground: oklch(99% 0 0);
+  --sidebar-accent: oklch(95% 0.02 155deg);
+  --sidebar-accent-foreground: oklch(25% 0.08 158deg);
+  --sidebar-border: oklch(91.5% 0.012 155deg);
+  --sidebar-ring: oklch(44% 0.145 158deg);
+  --success: oklch(72% 0.14 155deg);
+  --warning: oklch(78% 0.15 78deg);
   --error: oklch(65% 0.18 25deg);
 }
 
 [data-theme='dark'] {
-  /* ── Emerald-green + warm-gold palette (dark mode) ── */
-  --background: oklch(16% 0.02 155deg);
-  --foreground: oklch(96% 0.01 120deg);
-  --card: oklch(20% 0.025 155deg);
-  --card-foreground: oklch(96% 0.01 120deg);
-  --popover: oklch(16% 0.02 155deg);
-  --popover-foreground: oklch(96% 0.01 120deg);
-  --primary: oklch(72% 0.12 155deg);
-  --primary-foreground: oklch(16% 0.02 155deg);
-  --secondary: oklch(24% 0.04 155deg);
-  --secondary-foreground: oklch(96% 0.01 120deg);
-  --muted: oklch(24% 0.04 155deg);
-  --muted-foreground: oklch(65% 0.04 150deg);
-  --accent: oklch(70% 0.10 85deg);
-  --accent-foreground: oklch(96% 0.01 85deg);
+  /* ── Deep Velvet Emerald & Warm Champagne Gold (dark mode) ── */
+  --background: oklch(14.5% 0.028 160deg);
+  --foreground: oklch(97% 0.008 145deg);
+  --card: oklch(18.5% 0.035 160deg);
+  --card-foreground: oklch(97% 0.008 145deg);
+  --popover: oklch(17% 0.032 160deg);
+  --popover-foreground: oklch(97% 0.008 145deg);
+  --primary: oklch(74% 0.16 156deg);
+  --primary-foreground: oklch(14% 0.03 160deg);
+  --secondary: oklch(22.5% 0.04 160deg);
+  --secondary-foreground: oklch(95% 0.015 150deg);
+  --muted: oklch(22% 0.03 160deg);
+  --muted-foreground: oklch(68% 0.035 155deg);
+  --accent: oklch(78% 0.15 78deg);
+  --accent-foreground: oklch(15% 0.04 78deg);
   --destructive: oklch(45% 0.15 25deg);
-  --destructive-foreground: oklch(65% 0.22 25deg);
-  --border: oklch(28% 0.03 155deg);
-  --input: oklch(28% 0.03 155deg);
-  --ring: oklch(58% 0.12 155deg);
-  --chart-1: oklch(60% 0.15 155deg);
+  --destructive-foreground: oklch(95% 0.05 25deg);
+  --border: oklch(25.5% 0.03 160deg);
+  --input: oklch(25.5% 0.03 160deg);
+  --ring: oklch(65% 0.14 156deg);
+  --chart-1: oklch(74% 0.16 156deg);
   --chart-2: oklch(72% 0.12 140deg);
-  --chart-3: oklch(70% 0.10 85deg);
+  --chart-3: oklch(78% 0.15 78deg);
   --chart-4: oklch(55% 0.12 200deg);
   --chart-5: oklch(65% 0.15 75deg);
-  --sidebar: oklch(18% 0.025 155deg);
-  --sidebar-foreground: oklch(96% 0.01 120deg);
-  --sidebar-primary: oklch(72% 0.12 155deg);
-  --sidebar-primary-foreground: oklch(16% 0.02 155deg);
-  --sidebar-accent: oklch(28% 0.04 155deg);
-  --sidebar-accent-foreground: oklch(96% 0.01 120deg);
-  --sidebar-border: oklch(28% 0.03 155deg);
-  --sidebar-ring: oklch(58% 0.12 155deg);
-  --success: oklch(35% 0.08 155deg);
-  --warning: oklch(40% 0.08 85deg);
-  --error: oklch(45% 0.12 25deg);
+  --sidebar: oklch(16.5% 0.032 160deg);
+  --sidebar-foreground: oklch(97% 0.008 145deg);
+  --sidebar-primary: oklch(74% 0.16 156deg);
+  --sidebar-primary-foreground: oklch(14% 0.03 160deg);
+  --sidebar-accent: oklch(24% 0.035 160deg);
+  --sidebar-accent-foreground: oklch(97% 0.008 145deg);
+  --sidebar-border: oklch(25.5% 0.03 160deg);
+  --sidebar-ring: oklch(65% 0.14 156deg);
+  --success: oklch(45% 0.12 155deg);
+  --warning: oklch(55% 0.12 78deg);
+  --error: oklch(48% 0.15 25deg);
 }
 
 @theme inline {
@@ -208,9 +215,9 @@
   --color-error: var(--error);
 
   /* ── Stitch design tokens ── */
-  --color-gold-badge: #fbbf24;
+  --color-gold-badge: #d97706;
   --color-gold-badge-bg: #fef3c7;
-  --color-dark-section: #0b0f17;
+  --color-dark-section: #091712;
 }
 
 @layer base {

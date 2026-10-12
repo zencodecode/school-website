@@ -528,6 +528,10 @@ export interface ContentBlock {
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+        /**
+         * Align the column within the grid (e.g. choose Center to place Half or Two Thirds columns in the middle of the screen)
+         */
+        alignment?: ('left' | 'center' | 'right') | null;
         richText?: {
           root: {
             type: string;
@@ -1315,6 +1319,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
     | T
     | {
         size?: T;
+        alignment?: T;
         richText?: T;
         enableLink?: T;
         link?:

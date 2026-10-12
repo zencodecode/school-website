@@ -36,19 +36,19 @@ export const ProgramGridBlock: React.FC<ProgramGridProps & { id?: string }> = (p
               return (
                 <div
                   key={programId || index}
-                  className="bg-card border border-border rounded-xl p-6 flex flex-col justify-between group hover:border-primary transition-all shadow-sm"
+                  className="bg-card border border-border/80 rounded-2xl p-6 flex flex-col justify-between group hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 shadow-xs relative"
                 >
                   <div className="flex flex-col gap-4">
                     {/* Code + Badge header */}
-                    <div className="flex items-center justify-between pb-3 border-b border-border">
+                    <div className="flex items-center justify-between pb-3 border-b border-border/80">
                       {code && (
                         <span className="text-xs text-primary font-bold">{code}</span>
                       )}
                       {badge && (
                         <span
-                          className={`text-[11px] px-2 py-0.5 rounded ${
+                          className={`text-[11px] px-2.5 py-0.5 rounded-full ${
                             badgeStyle === 'gold'
-                              ? 'bg-gold-badge-bg text-amber-700'
+                              ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300/60 dark:border-amber-700/50 font-semibold'
                               : 'bg-muted text-muted-foreground'
                           }`}
                         >
