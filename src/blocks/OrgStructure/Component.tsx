@@ -9,12 +9,19 @@ export const OrgStructureBlock: React.FC<OrgStructureBlockProps> = ({ title, mem
       {title && <h2 className="mb-8 text-center">{title}</h2>}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
         {sorted.map((member, i) => (
-          <div key={i} className="text-center">
+          <div
+            key={i}
+            className="bg-card border border-border/80 rounded-2xl p-6 text-center hover:border-primary/60 hover:-translate-y-1 hover:shadow-md transition-all duration-300 group shadow-xs"
+          >
             {member.photo && typeof member.photo === 'object' && (
-              <Media resource={member.photo} className="rounded-full mx-auto mb-3 w-32 h-32" />
+              <div className="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary/15 group-hover:ring-primary/40 transition-all shadow-sm">
+                <Media resource={member.photo} className="w-full h-full object-cover" />
+              </div>
             )}
-            <p className="font-semibold">{member.name}</p>
-            <p className="text-sm text-muted-foreground">{member.position}</p>
+            <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+              {member.name}
+            </p>
+            <p className="text-sm text-muted-foreground mt-0.5">{member.position}</p>
           </div>
         ))}
       </div>

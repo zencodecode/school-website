@@ -8,9 +8,9 @@ const colSpanMap: Record<string, string> = {
 }
 
 const badgeStyleMap: Record<string, string> = {
-  primary: 'bg-primary/10 text-primary',
-  secondary: 'bg-accent/10 text-accent-foreground',
-  gold: 'bg-gold-badge-bg text-amber-700',
+  primary: 'bg-primary/10 text-primary border border-primary/20',
+  secondary: 'bg-accent/15 text-accent-foreground border border-accent/25',
+  gold: 'bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300/60 dark:border-amber-700/50 font-semibold',
 }
 
 export const FeatureGridBlock: React.FC<FeatureGridProps & { id?: string }> = (props) => {
@@ -46,7 +46,7 @@ export const FeatureGridBlock: React.FC<FeatureGridProps & { id?: string }> = (p
             return (
               <div
                 key={index}
-                className={`bg-background border border-border rounded-xl p-8 flex flex-col justify-between group hover:border-primary transition-all md:col-span-1 ${spanClass}`}
+                className={`bg-card border border-border/80 rounded-2xl p-8 flex flex-col justify-between group hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 shadow-xs md:col-span-1 ${spanClass}`}
               >
                 <div className="flex flex-col gap-4">
                   <div className="flex items-start justify-between">

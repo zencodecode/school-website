@@ -13,20 +13,44 @@ export async function Footer() {
 
   const navItems = footerData?.navItems || []
 
-  // Footer has dark background, prefer logoDark, fallback to logo
-  const logoDark = typeof headerData?.logoDark === 'object' ? (headerData.logoDark as Media) : null
   const logo = typeof headerData?.logo === 'object' ? (headerData.logo as Media) : null
-  const footerLogo = logoDark || logo
+  const logoDark = typeof headerData?.logoDark === 'object' ? (headerData.logoDark as Media) : null
   const siteName = headerData?.siteName || 'Ponpes Abu Bakar Shiddiq'
 
   return (
-    <footer className="mt-auto border-t border-border bg-black dark:bg-card text-white">
-      <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
+    <footer className="mt-auto border-t border-border bg-card text-foreground transition-colors">
+      <div className="container py-10 gap-8 flex flex-col md:flex-row md:justify-between md:items-center">
         <Link className="flex items-center" href="/">
-          {footerLogo ? (
+          {logo ? (
+            <>
+              {/* Light mode: show logo, Dark mode: show logoDark or invert */}
+              <img
+                src={logo.url || ''}
+                alt={logo.alt || siteName}
+                width={193}
+                height={34}
+                loading="lazy"
+                decoding="async"
+                className={`max-w-[9.375rem] w-full h-[34px] object-contain ${
+                  logoDark ? 'dark:hidden' : 'dark:invert'
+                }`}
+              />
+              {logoDark && (
+                <img
+                  src={logoDark.url || ''}
+                  alt={logoDark.alt || siteName}
+                  width={193}
+                  height={34}
+                  loading="lazy"
+                  decoding="async"
+                  className="max-w-[9.375rem] w-full h-[34px] object-contain hidden dark:block"
+                />
+              )}
+            </>
+          ) : logoDark ? (
             <img
-              src={footerLogo.url || ''}
-              alt={footerLogo.alt || siteName}
+              src={logoDark.url || ''}
+              alt={logoDark.alt || siteName}
               width={193}
               height={34}
               loading="lazy"
@@ -34,15 +58,21 @@ export async function Footer() {
               className="max-w-[9.375rem] w-full h-[34px] object-contain"
             />
           ) : (
-            <span className="text-xl font-bold">{siteName}</span>
+            <span className="text-xl font-bold tracking-tight text-foreground">{siteName}</span>
           )}
         </Link>
 
-        <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
+        <div className="flex flex-col-reverse items-start md:flex-row gap-6 md:items-center">
           <ThemeSelector />
-          <nav className="flex flex-col md:flex-row gap-4">
+          <nav className="flex flex-col md:flex-row gap-5">
             {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
+              return (
+                <CMSLink
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                  key={i}
+                  {...link}
+                />
+              )
             })}
           </nav>
         </div>
