@@ -38,13 +38,22 @@ export const TestimonialBlock: React.FC<TestimonialProps & { id?: string }> = (p
       id={id ?? undefined}
       className="w-full bg-dark-section text-white py-20 relative overflow-hidden"
     >
-      <div className="container">
+      {/* Decorative ambient glowing orbs */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column — Photo */}
           <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-xl overflow-hidden border border-gray-800 shadow-2xl bg-gray-900">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-xl overflow-hidden border border-gray-800 shadow-2xl bg-gray-900 group">
               {hasPhoto ? (
-                <Media resource={photo} fill className="object-cover object-center" />
+                <Media
+                  resource={photo}
+                  fill
+                  className="object-cover object-center"
+                  imgClassName="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-gray-600">
                   {personName?.charAt(0)}

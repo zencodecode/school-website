@@ -246,3 +246,45 @@ html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
 }
+
+/* Lexical RichText formatting */
+.payload-richtext ul.list-check {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.payload-richtext .list-item-checkbox {
+  list-style: none !important;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-block: 0.25rem;
+}
+
+.payload-richtext .list-item-checkbox input[type='checkbox'] {
+  margin-top: 0.35rem;
+  accent-color: var(--primary);
+}
+
+.payload-richtext .lexical-table-container {
+  overflow-x: auto;
+  margin-block: 1.5rem;
+}
+
+.payload-richtext .lexical-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.payload-richtext .lexical-table-cell {
+  border: 1px solid var(--border) !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+.payload-richtext .lexical-table-cell-header-1,
+.payload-richtext .lexical-table-cell-header-2,
+.payload-richtext .lexical-table-cell-header-3 {
+  background-color: var(--muted) !important;
+  font-weight: 600;
+}
+

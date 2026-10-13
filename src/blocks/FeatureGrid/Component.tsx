@@ -8,9 +8,11 @@ const colSpanMap: Record<string, string> = {
 }
 
 const badgeStyleMap: Record<string, string> = {
-  primary: 'bg-primary/10 text-primary border border-primary/20',
-  secondary: 'bg-accent/15 text-accent-foreground border border-accent/25',
-  gold: 'bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300/60 dark:border-amber-700/50 font-semibold',
+  primary:
+    'bg-primary/10 text-primary border border-primary/20 dark:bg-primary/15 dark:text-primary dark:border-primary/30',
+  secondary:
+    'bg-accent/15 text-accent-foreground border border-accent/30 dark:bg-accent/15 dark:text-accent dark:border-accent/30',
+  gold: 'bg-accent/15 text-accent-foreground border border-accent/30 dark:bg-accent/15 dark:text-accent dark:border-accent/30 font-semibold',
 }
 
 export const FeatureGridBlock: React.FC<FeatureGridProps & { id?: string }> = (props) => {
@@ -46,13 +48,16 @@ export const FeatureGridBlock: React.FC<FeatureGridProps & { id?: string }> = (p
             return (
               <div
                 key={index}
-                className={`bg-card border border-border/80 rounded-2xl p-8 flex flex-col justify-between group hover:border-primary/60 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 shadow-xs md:col-span-1 ${spanClass}`}
+                className={`bg-card border border-border/80 rounded-2xl p-8 flex flex-col justify-between group hover:border-primary/60 hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 shadow-xs md:col-span-1 relative overflow-hidden ${spanClass}`}
               >
+                {/* Subtle top shimmer glow on hover */}
+                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-2xl pointer-events-none" />
+
                 <div className="flex flex-col gap-4">
                   <div className="flex items-start justify-between">
                     {feature.badge ? (
                       <span
-                        className={`text-xs px-2.5 py-1 rounded-full font-semibold ${badgeClass}`}
+                        className={`text-xs px-2.5 py-1 rounded-full font-semibold transition-colors ${badgeClass}`}
                       >
                         {feature.badge}
                       </span>
@@ -60,14 +65,14 @@ export const FeatureGridBlock: React.FC<FeatureGridProps & { id?: string }> = (p
                       <div />
                     )}
                     {feature.icon && (
-                      <span className="material-symbols-outlined text-muted-foreground text-[20px]">
+                      <span className="material-symbols-outlined text-muted-foreground group-hover:text-primary group-hover:scale-125 transition-all duration-300 text-[22px]">
                         {feature.icon}
                       </span>
                     )}
                   </div>
 
                   <div>
-                    <h3 className={`font-headline ${headingSize} font-bold mt-2`}>
+                    <h3 className={`font-headline ${headingSize} font-bold mt-2 group-hover:text-primary transition-colors duration-200`}>
                       {feature.heading}
                     </h3>
                     <p className="text-body-md text-muted-foreground leading-relaxed mt-3 max-w-xl">

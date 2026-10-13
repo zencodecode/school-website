@@ -15,6 +15,7 @@ interface HeaderClientProps {
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   /* Storing the value in a useState to avoid hydration errors */
   const [theme, setTheme] = useState<string | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
   const { headerTheme, setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
 
@@ -28,13 +29,29 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerTheme])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30)
+    }
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const logo = typeof data.logo === 'object' ? (data.logo as Media) : null
   const logoDark = typeof data.logoDark === 'object' ? (data.logoDark as Media) : null
   const siteName = data.siteName || 'Ponpes Abu Bakar Shiddiq'
 
   return (
-    <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-8 flex justify-between">
+    <header
+      className={`sticky top-0 z-30 w-full transition-all duration-300 ${
+        isScrolled
+          ? 'bg-background/85 backdrop-blur-md border-b border-border/50 shadow-xs py-3.5'
+          : 'bg-transparent py-5'
+      }`}
+      {...(theme && !isScrolled ? { 'data-theme': theme } : {})}
+    >
+      <div className="container flex justify-between items-center">
         <Link href="/" className="flex items-center">
           {logo ? (
             <>
@@ -42,23 +59,25 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               <img
                 src={logo.url || ''}
                 alt={logo.alt || siteName}
-                width={193}
-                height={34}
+                width={logo.width || 280}
+                height={logo.height || 88}
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
-                className={`max-w-[9.375rem] w-full h-[34px] object-contain ${logoDark ? 'dark:hidden' : 'dark:invert'}`}
+                className={`h-12 w-auto max-w-[14rem] md:max-w-[18rem] object-contain ${
+                  logoDark ? 'dark:hidden' : ''
+                }`}
               />
               {logoDark && (
                 <img
                   src={logoDark.url || ''}
                   alt={logoDark.alt || siteName}
-                  width={193}
-                  height={34}
+                  width={logoDark.width || 280}
+                  height={logoDark.height || 88}
                   loading="eager"
                   fetchPriority="high"
                   decoding="async"
-                  className="max-w-[9.375rem] w-full h-[34px] object-contain hidden dark:block"
+                  className="h-12 w-auto max-w-[14rem] md:max-w-[18rem] object-contain hidden dark:block"
                 />
               )}
             </>

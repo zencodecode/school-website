@@ -44,7 +44,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center min-h-[80vh] text-white"
+      className="relative -mt-[10rem] flex items-center justify-center min-h-[80vh] text-white"
       data-theme="dark"
     >
       {/* Background media sits behind the content and fills the sized hero. */}
@@ -145,13 +145,20 @@ const HeroCarousel: React.FC<{
           <div className="flex h-full">
             {slides.map((image, i) => (
               <div
-                className="relative flex-[0_0_100%] min-w-0 h-full"
+                className="relative flex-[0_0_100%] min-w-0 h-full overflow-hidden"
                 key={i}
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${i + 1} of ${slides.length}`}
               >
-                <Media fill imgClassName="object-cover" priority={i === 0} resource={image} />
+                <Media
+                  fill
+                  imgClassName={`object-cover transition-transform duration-[7000ms] ease-out ${
+                    i === selectedIndex ? 'scale-105' : 'scale-100'
+                  }`}
+                  priority={i === 0}
+                  resource={image}
+                />
               </div>
             ))}
           </div>
@@ -161,7 +168,7 @@ const HeroCarousel: React.FC<{
       {/* Controls: top layer, above the foreground content so they are clickable. */}
       <button
         aria-label="Previous slide"
-        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-2.5 text-white transition-all duration-200 hover:bg-black/70 hover:scale-110 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
         onClick={scrollPrev}
         type="button"
       >
@@ -169,7 +176,7 @@ const HeroCarousel: React.FC<{
       </button>
       <button
         aria-label="Next slide"
-        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-black/40 p-2.5 text-white transition-all duration-200 hover:bg-black/70 hover:scale-110 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
         onClick={scrollNext}
         type="button"
       >
@@ -182,8 +189,8 @@ const HeroCarousel: React.FC<{
             aria-current={i === selectedIndex}
             aria-label={`Go to slide ${i + 1}`}
             className={
-              'h-2.5 w-2.5 rounded-full transition ' +
-              (i === selectedIndex ? 'bg-white' : 'bg-white/40 hover:bg-white/70')
+              'h-2 rounded-full transition-all duration-300 ' +
+              (i === selectedIndex ? 'w-8 bg-white shadow-sm' : 'w-2 bg-white/40 hover:bg-white/70')
             }
             key={i}
             onClick={() => scrollTo(i)}

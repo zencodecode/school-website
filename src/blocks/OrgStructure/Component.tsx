@@ -11,14 +11,20 @@ export const OrgStructureBlock: React.FC<OrgStructureBlockProps> = ({ title, mem
         {sorted.map((member, i) => (
           <div
             key={i}
-            className="bg-card border border-border/80 rounded-2xl p-6 text-center hover:border-primary/60 hover:-translate-y-1 hover:shadow-md transition-all duration-300 group shadow-xs"
+            className="bg-card border border-border/80 rounded-2xl p-6 text-center hover:border-primary/60 hover:-translate-y-1.5 hover:shadow-lg transition-all duration-300 group shadow-xs relative overflow-hidden"
           >
+            {/* Top accent shine on hover */}
+            <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             {member.photo && typeof member.photo === 'object' && (
-              <div className="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary/15 group-hover:ring-primary/40 transition-all shadow-sm">
-                <Media resource={member.photo} className="w-full h-full object-cover" />
+              <div className="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden ring-4 ring-primary/15 group-hover:ring-8 group-hover:ring-primary/30 transition-all duration-500 shadow-sm relative">
+                <Media
+                  resource={member.photo}
+                  className="w-full h-full"
+                  imgClassName="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
               </div>
             )}
-            <p className="font-semibold text-foreground group-hover:text-primary transition-colors">
+            <p className="font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
               {member.name}
             </p>
             <p className="text-sm text-muted-foreground mt-0.5">{member.position}</p>
