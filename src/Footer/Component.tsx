@@ -23,27 +23,27 @@ export async function Footer() {
         <Link className="flex items-center" href="/">
           {logo ? (
             <>
-              {/* Light mode: show logo, Dark mode: show logoDark or invert */}
+              {/* Light mode: show logo, Dark mode: show logoDark or logo */}
               <img
                 src={logo.url || ''}
                 alt={logo.alt || siteName}
-                width={193}
-                height={34}
+                width={logo.width || 280}
+                height={logo.height || 88}
                 loading="lazy"
                 decoding="async"
-                className={`max-w-[9.375rem] w-full h-[34px] object-contain ${
-                  logoDark ? 'dark:hidden' : 'dark:invert'
+                className={`h-12 w-auto max-w-[14rem] md:max-w-[18rem] object-contain ${
+                  logoDark ? 'dark:hidden' : ''
                 }`}
               />
               {logoDark && (
                 <img
                   src={logoDark.url || ''}
                   alt={logoDark.alt || siteName}
-                  width={193}
-                  height={34}
+                  width={logoDark.width || 280}
+                  height={logoDark.height || 88}
                   loading="lazy"
                   decoding="async"
-                  className="max-w-[9.375rem] w-full h-[34px] object-contain hidden dark:block"
+                  className="h-12 w-auto max-w-[14rem] md:max-w-[18rem] object-contain hidden dark:block"
                 />
               )}
             </>
@@ -51,11 +51,11 @@ export async function Footer() {
             <img
               src={logoDark.url || ''}
               alt={logoDark.alt || siteName}
-              width={193}
-              height={34}
+              width={logoDark.width || 280}
+              height={logoDark.height || 88}
               loading="lazy"
               decoding="async"
-              className="max-w-[9.375rem] w-full h-[34px] object-contain"
+              className="h-12 w-auto max-w-[14rem] md:max-w-[18rem] object-contain"
             />
           ) : (
             <span className="text-xl font-bold tracking-tight text-foreground">{siteName}</span>

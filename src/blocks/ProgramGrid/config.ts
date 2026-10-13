@@ -50,8 +50,9 @@ export const ProgramGrid: Block = {
           type: 'select',
           defaultValue: 'default',
           options: [
-            { label: 'Default', value: 'default' },
-            { label: 'Gold', value: 'gold' },
+            { label: 'Emerald (Default)', value: 'default' },
+            { label: 'Gold (Accent)', value: 'gold' },
+            { label: 'Muted', value: 'muted' },
           ],
         },
         {

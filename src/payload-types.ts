@@ -905,7 +905,7 @@ export interface ProgramGridBlock {
          * Badge text like "Full Boarding"
          */
         badge?: string | null;
-        badgeStyle?: ('default' | 'gold') | null;
+        badgeStyle?: ('default' | 'gold' | 'muted') | null;
         heading: string;
         description: string;
         specs?:

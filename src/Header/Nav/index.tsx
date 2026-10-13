@@ -128,7 +128,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
 
             {isOpen && (
               <div
-                className="absolute left-0 top-full pt-2 min-w-[200px] z-50"
+                className="absolute left-0 top-full pt-2 min-w-[200px] z-50 animate-in fade-in-0 zoom-in-95 duration-150"
                 onClick={() => setOpenIndex(null)}
               >
                 <div className="rounded-md border bg-background shadow-md py-1 overflow-hidden">
