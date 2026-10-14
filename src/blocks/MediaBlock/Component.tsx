@@ -27,24 +27,34 @@ export const MediaBlock: React.FC<Props> = (props) => {
     media,
     staticImage,
     disableInnerContainer,
+    alignment,
   } = props
 
   let caption
   if (media && typeof media === 'object') caption = media.caption
 
+  // "Float" so surrounding paragraphs wrap beside the media.
+  const isFloat = alignment === 'left' || alignment === 'right'
+
   return (
     <div
       className={cn(
-        '',
         {
-          container: enableGutter,
+          container: enableGutter && !isFloat,
+          // Width capped at ~45% on wide screens; full-width on mobile so it stacks naturally.
+          'float-left clear-left mr-6 mb-4 w-full sm:max-w-[45%]': alignment === 'left',
+          'float-right clear-right ml-6 mb-4 w-full sm:max-w-[45%]': alignment === 'right',
         },
         className,
       )}
     >
       {(media || staticImage) && (
         <Media
-          imgClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
+          imgClassName={cn(
+            'border border-border rounded-[0.8rem]',
+            { 'w-full h-auto': isFloat },
+            imgClassName,
+          )}
           resource={media}
           src={staticImage}
         />
@@ -54,7 +64,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
           className={cn(
             'mt-6',
             {
-              container: !disableInnerContainer,
+              container: !disableInnerContainer && !isFloat,
             },
             captionClassName,
           )}
