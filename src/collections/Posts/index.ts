@@ -26,6 +26,9 @@ import { Banner } from '../../blocks/Banner/config'
 import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
+import { VideoEmbed } from '../../blocks/VideoEmbed/config'
+import { MediaWithText } from '../../blocks/MediaWithText/config'
+import { Gallery } from '../../blocks/Gallery/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -101,7 +104,17 @@ export const Posts: CollectionConfig<'posts'> = {
                   return [
                     ...rootFeatures,
                     HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock, CallToAction] }),
+                    BlocksFeature({
+                      blocks: [
+                        Banner,
+                        Code,
+                        MediaBlock,
+                        CallToAction,
+                        VideoEmbed,
+                        MediaWithText,
+                        Gallery,
+                      ],
+                    }),
                     UnorderedListFeature(),
                     OrderedListFeature(),
                     ChecklistFeature(),
