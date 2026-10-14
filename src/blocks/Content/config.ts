@@ -18,6 +18,7 @@ import {
 import { Banner } from '@/blocks/Banner/config'
 import { Code } from '@/blocks/Code/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { VideoEmbed } from '@/blocks/VideoEmbed/config'
 import { link } from '@/fields/link'
 
 const columnFields: Field[] = [
@@ -77,7 +78,7 @@ const columnFields: Field[] = [
         return [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }),
-          BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+          BlocksFeature({ blocks: [Banner, Code, MediaBlock, VideoEmbed] }),
           UploadFeature({
             collections: {
               media: {

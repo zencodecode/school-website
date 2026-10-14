@@ -233,6 +233,7 @@ export interface Page {
     | FeatureGridBlock
     | ProgramGridBlock
     | TestimonialBlock
+    | VideoEmbedBlock
   )[];
   meta?: {
     title?: string | null;
@@ -951,6 +952,23 @@ export interface TestimonialBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoEmbedBlock".
+ */
+export interface VideoEmbedBlock {
+  /**
+   * Tempel link biasa video, misalnya https://www.youtube.com/watch?v=xxxx atau https://vimeo.com/xxxx. Parameter pelacakan seperti ?si=... akan diabaikan otomatis. Kode <iframe> embed juga diterima, tetapi link biasa lebih disarankan.
+   */
+  url: string;
+  /**
+   * Teks keterangan yang ditampilkan di bawah video.
+   */
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'videoEmbed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1271,6 +1289,7 @@ export interface PagesSelect<T extends boolean = true> {
         featureGrid?: T | FeatureGridBlockSelect<T>;
         programGrid?: T | ProgramGridBlockSelect<T>;
         testimonial?: T | TestimonialBlockSelect<T>;
+        videoEmbed?: T | VideoEmbedBlockSelect<T>;
       };
   meta?:
     | T
@@ -1484,6 +1503,16 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
   orgDescription?: T;
   linkLabel?: T;
   linkUrl?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoEmbedBlock_select".
+ */
+export interface VideoEmbedBlockSelect<T extends boolean = true> {
+  url?: T;
+  caption?: T;
   id?: T;
   blockName?: T;
 }

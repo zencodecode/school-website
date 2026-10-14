@@ -12,6 +12,7 @@ import { OrgStructureBlock } from '@/blocks/OrgStructure/Component'
 import { ProgramGridBlock } from '@/blocks/ProgramGrid/Component'
 import { StatsGridBlock } from '@/blocks/StatsGrid/Component'
 import { TestimonialBlock } from '@/blocks/Testimonial/Component'
+import { VideoEmbedBlock } from '@/blocks/VideoEmbed/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -24,6 +25,7 @@ const blockComponents = {
   programGrid: ProgramGridBlock,
   statsGrid: StatsGridBlock,
   testimonial: TestimonialBlock,
+  videoEmbed: VideoEmbedBlock,
 }
 
 export const RenderBlocks: React.FC<{

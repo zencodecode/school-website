@@ -12,6 +12,7 @@ import { OrgStructureBlock } from '../../blocks/OrgStructure/config'
 import { ProgramGrid } from '../../blocks/ProgramGrid/config'
 import { StatsGrid } from '../../blocks/StatsGrid/config'
 import { Testimonial } from '../../blocks/Testimonial/config'
+import { VideoEmbed } from '../../blocks/VideoEmbed/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -88,6 +89,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeatureGrid,
                 ProgramGrid,
                 Testimonial,
+                VideoEmbed,
               ],
               required: true,
               admin: {
