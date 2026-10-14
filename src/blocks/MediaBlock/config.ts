@@ -14,14 +14,15 @@ export const MediaBlock: Block = {
       name: 'alignment',
       type: 'select',
       defaultValue: 'default',
+      label: 'Alignment',
       options: [
-        { label: 'Default (lebar penuh)', value: 'default' },
-        { label: 'Mengambang ke kiri (teks membungkus di kanan)', value: 'left' },
-        { label: 'Mengambang ke kanan (teks membungkus di kiri)', value: 'right' },
+        { label: 'Default (full width)', value: 'default' },
+        { label: 'Float left (text wraps on the right)', value: 'left' },
+        { label: 'Float right (text wraps on the left)', value: 'right' },
       ],
       admin: {
         description:
-          'Atur posisi media di dalam teks. Opsi "mengambang" membuat paragraf di sekitarnya membungkus di sisi media. Efektif di layar lebar; di layar ponsel media otomatis menumpuk (lebar penuh).',
+          'Set the media position within the text. The "float" options let surrounding paragraphs wrap beside the media. Effective on wide screens; on mobile the media stacks (full width).',
       },
     },
   ],

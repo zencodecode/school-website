@@ -4,8 +4,8 @@ export const Gallery: Block = {
   slug: 'gallery',
   interfaceName: 'GalleryBlock',
   labels: {
-    singular: 'Galeri',
-    plural: 'Galeri',
+    singular: 'Gallery',
+    plural: 'Galleries',
   },
   fields: [
     {
@@ -15,10 +15,10 @@ export const Gallery: Block = {
           name: 'layout',
           type: 'select',
           defaultValue: 'grid',
-          label: 'Tata Letak',
+          label: 'Layout',
           options: [
-            { label: 'Grid (kisi rapi)', value: 'grid' },
-            { label: 'Masonry (tinggi bervariasi)', value: 'masonry' },
+            { label: 'Grid', value: 'grid' },
+            { label: 'Masonry (varied height)', value: 'masonry' },
             { label: 'Carousel (slider)', value: 'carousel' },
           ],
           admin: { width: '50%' },
@@ -27,15 +27,15 @@ export const Gallery: Block = {
           name: 'columns',
           type: 'select',
           defaultValue: '3',
-          label: 'Jumlah Kolom',
+          label: 'Columns',
           options: [
-            { label: '2 Kolom', value: '2' },
-            { label: '3 Kolom', value: '3' },
-            { label: '4 Kolom', value: '4' },
+            { label: '2 Columns', value: '2' },
+            { label: '3 Columns', value: '3' },
+            { label: '4 Columns', value: '4' },
           ],
           admin: {
             width: '50%',
-            description: 'Berlaku untuk tata letak Grid dan Masonry (di layar lebar).',
+            description: 'Applies to Grid and Masonry layouts (on wide screens).',
             condition: (_, siblingData) => siblingData?.layout !== 'carousel',
           },
         },
@@ -44,10 +44,10 @@ export const Gallery: Block = {
     {
       name: 'enableLightbox',
       type: 'checkbox',
-      label: 'Aktifkan Lightbox',
+      label: 'Enable Lightbox',
       defaultValue: true,
       admin: {
-        description: 'Klik gambar untuk membukanya layar penuh dengan navigasi sebelumnya/berikutnya.',
+        description: 'Click an image to open it fullscreen with previous/next navigation.',
       },
     },
     {
@@ -66,7 +66,7 @@ export const Gallery: Block = {
         {
           name: 'autoplayInterval',
           type: 'number',
-          label: 'Interval Autoplay (ms)',
+          label: 'Autoplay Interval (ms)',
           defaultValue: 5000,
           min: 1000,
           admin: {
@@ -81,11 +81,11 @@ export const Gallery: Block = {
     {
       name: 'images',
       type: 'array',
-      label: 'Gambar',
+      label: 'Images',
       minRows: 1,
       labels: {
-        singular: 'Gambar',
-        plural: 'Gambar',
+        singular: 'Image',
+        plural: 'Images',
       },
       admin: {
         initCollapsed: true,
@@ -100,7 +100,7 @@ export const Gallery: Block = {
         {
           name: 'caption',
           type: 'text',
-          label: 'Keterangan (opsional)',
+          label: 'Caption (optional)',
         },
       ],
     },

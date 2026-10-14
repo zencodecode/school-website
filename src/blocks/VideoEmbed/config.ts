@@ -14,17 +14,17 @@ export const VideoEmbed: Block = {
     {
       name: 'url',
       type: 'text',
-      label: 'URL Video (YouTube atau Vimeo)',
+      label: 'Video URL (YouTube or Vimeo)',
       required: true,
       admin: {
         description:
-          'Tempel link biasa video, misalnya https://www.youtube.com/watch?v=xxxx atau https://vimeo.com/xxxx. Parameter pelacakan seperti ?si=... akan diabaikan otomatis. Kode <iframe> embed juga diterima, tetapi link biasa lebih disarankan.',
+          'Paste a plain video link, e.g. https://www.youtube.com/watch?v=xxxx or https://vimeo.com/xxxx. Tracking parameters such as ?si=... are ignored automatically. A full <iframe> embed code is also accepted, but a plain link is recommended.',
       },
       validate: ((value) => {
-        if (!value) return 'URL video wajib diisi'
+        if (!value) return 'Video URL is required'
         const result = getVideoEmbed(value)
         if (!result) {
-          return 'URL tidak dikenali. Gunakan link YouTube atau Vimeo yang valid.'
+          return 'Unrecognized URL. Please use a valid YouTube or Vimeo link.'
         }
         return true
       }) as TextFieldSingleValidation,
@@ -32,9 +32,9 @@ export const VideoEmbed: Block = {
     {
       name: 'caption',
       type: 'text',
-      label: 'Keterangan (opsional)',
+      label: 'Caption (optional)',
       admin: {
-        description: 'Teks keterangan yang ditampilkan di bawah video.',
+        description: 'Caption text shown below the video.',
       },
     },
   ],

@@ -12,7 +12,7 @@ type Props = AccentSectionProps & {
   id?: string
 }
 
-// Semua kelas berbasis token tema sehingga otomatis menyesuaikan dark/light.
+// All classes are theme-token based so they automatically adapt to dark/light.
 const backgroundClasses: Record<string, string> = {
   none: '',
   muted: 'bg-muted',

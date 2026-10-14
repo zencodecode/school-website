@@ -9,8 +9,8 @@ export const MediaWithText: Block = {
   slug: 'mediaWithText',
   interfaceName: 'MediaWithTextBlock',
   labels: {
-    singular: 'Media + Teks (berdampingan)',
-    plural: 'Media + Teks (berdampingan)',
+    singular: 'Media + Text (side by side)',
+    plural: 'Media + Text (side by side)',
   },
   fields: [
     {
@@ -20,10 +20,10 @@ export const MediaWithText: Block = {
           name: 'mediaPosition',
           type: 'select',
           defaultValue: 'left',
-          label: 'Posisi Media',
+          label: 'Media Position',
           options: [
-            { label: 'Media di kiri', value: 'left' },
-            { label: 'Media di kanan', value: 'right' },
+            { label: 'Media on left', value: 'left' },
+            { label: 'Media on right', value: 'right' },
           ],
           admin: { width: '50%' },
         },
@@ -31,11 +31,11 @@ export const MediaWithText: Block = {
           name: 'mediaWidth',
           type: 'select',
           defaultValue: 'half',
-          label: 'Lebar Media',
+          label: 'Media Width',
           options: [
-            { label: 'Sepertiga', value: 'oneThird' },
-            { label: 'Setengah', value: 'half' },
-            { label: 'Dua pertiga', value: 'twoThirds' },
+            { label: 'One third', value: 'oneThird' },
+            { label: 'Half', value: 'half' },
+            { label: 'Two thirds', value: 'twoThirds' },
           ],
           admin: { width: '50%' },
         },
@@ -50,7 +50,7 @@ export const MediaWithText: Block = {
     {
       name: 'richText',
       type: 'richText',
-      label: 'Teks',
+      label: 'Text',
       required: true,
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
@@ -62,13 +62,13 @@ export const MediaWithText: Block = {
       name: 'verticalAlignment',
       type: 'select',
       defaultValue: 'center',
-      label: 'Perataan Vertikal',
+      label: 'Vertical Alignment',
       options: [
-        { label: 'Tengah', value: 'center' },
-        { label: 'Rata atas', value: 'start' },
+        { label: 'Center', value: 'center' },
+        { label: 'Top', value: 'start' },
       ],
       admin: {
-        description: 'Perataan vertikal antara media dan teks ketika ditampilkan berdampingan.',
+        description: 'Vertical alignment between the media and text when shown side by side.',
       },
     },
   ],

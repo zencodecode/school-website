@@ -33,7 +33,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
   let caption
   if (media && typeof media === 'object') caption = media.caption
 
-  // "Mengambang" (float) agar paragraf di sekitarnya membungkus di sisi media.
+  // "Float" so surrounding paragraphs wrap beside the media.
   const isFloat = alignment === 'left' || alignment === 'right'
 
   return (
@@ -41,7 +41,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
       className={cn(
         {
           container: enableGutter && !isFloat,
-          // Lebar dibatasi ~45% di layar lebar; di ponsel full-width sehingga menumpuk alami.
+          // Width capped at ~45% on wide screens; full-width on mobile so it stacks naturally.
           'float-left clear-left mr-6 mb-4 w-full sm:max-w-[45%]': alignment === 'left',
           'float-right clear-right ml-6 mb-4 w-full sm:max-w-[45%]': alignment === 'right',
         },

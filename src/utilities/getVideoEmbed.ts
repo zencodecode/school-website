@@ -1,10 +1,10 @@
 /**
- * Utility untuk mem-parsing URL video (YouTube / Vimeo) dan
- * menghasilkan URL embed yang aman untuk digunakan di <iframe>.
+ * Utility for parsing video URLs (YouTube / Vimeo) and producing a safe
+ * embed URL for use in an <iframe>.
  *
- * Alasan keamanan: kita TIDAK pernah menaruh URL mentah dari admin
- * langsung ke src iframe. Sebaliknya kita ekstrak ID video, lalu
- * membangun URL embed sendiri. Ini mencegah injeksi iframe sembarangan.
+ * Security rationale: we NEVER place the raw admin-provided URL directly into
+ * the iframe src. Instead we extract the video ID and build the embed URL
+ * ourselves. This prevents arbitrary iframe injection.
  */
 
 export type VideoProvider = 'youtube' | 'vimeo'
@@ -16,25 +16,25 @@ export interface VideoEmbedResult {
 }
 
 /**
- * Ekstrak informasi embed dari URL video YouTube atau Vimeo.
- * Mengembalikan null jika URL tidak dikenali / tidak valid.
+ * Extracts embed info from a YouTube or Vimeo video URL.
+ * Returns null if the URL is unrecognized / invalid.
  *
- * Format YouTube yang didukung:
+ * Supported YouTube formats:
  *   - https://www.youtube.com/watch?v=VIDEO_ID
  *   - https://youtu.be/VIDEO_ID
  *   - https://www.youtube.com/embed/VIDEO_ID
  *   - https://www.youtube.com/shorts/VIDEO_ID
  *   - https://www.youtube.com/live/VIDEO_ID
  *
- * Format Vimeo yang didukung:
+ * Supported Vimeo formats:
  *   - https://vimeo.com/VIDEO_ID
  *   - https://player.vimeo.com/video/VIDEO_ID
  */
 export function getVideoEmbed(rawInput?: string | null): VideoEmbedResult | null {
   if (!rawInput || typeof rawInput !== 'string') return null
 
-  // Jika admin tidak sengaja menempel kode <iframe ... src="..."> penuh,
-  // ekstrak nilai src-nya. Idealnya admin cukup menempel link biasa.
+  // If the admin accidentally pasted a full <iframe ... src="..."> snippet,
+  // extract its src value. Ideally the admin just pastes a plain link.
   const url = extractUrlFromMaybeIframe(rawInput.trim())
   if (!url) return null
 
@@ -86,9 +86,9 @@ export function getVideoEmbed(rawInput?: string | null): VideoEmbedResult | null
 }
 
 /**
- * Jika input adalah kode <iframe ... src="..."> penuh (hasil tombol "Embed"
- * di YouTube), ambil nilai atribut src. Jika bukan, kembalikan input apa adanya
- * agar bisa diproses sebagai URL biasa.
+ * If the input is a full <iframe ... src="..."> snippet (from YouTube's "Embed"
+ * button), take the src attribute value. Otherwise return the input as-is so it
+ * can be processed as a plain URL.
  */
 function extractUrlFromMaybeIframe(input: string): string {
   if (!input.toLowerCase().includes('<iframe')) return input
@@ -101,12 +101,12 @@ function buildYouTube(id: string): VideoEmbedResult {
   return {
     provider: 'youtube',
     id,
-    // youtube-nocookie untuk privasi lebih baik (tidak set cookie tracking sampai diputar)
+    // youtube-nocookie for better privacy (no tracking cookies until playback)
     embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
   }
 }
 
 function isValidYouTubeId(id: string): boolean {
-  // ID video YouTube: 11 karakter alfanumerik, dash, underscore
+  // YouTube video ID: 11 alphanumeric characters, dash, underscore
   return /^[a-zA-Z0-9_-]{11}$/.test(id)
 }

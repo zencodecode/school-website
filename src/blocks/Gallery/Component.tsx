@@ -43,7 +43,7 @@ export const GalleryBlock: React.FC<Props> = (props) => {
     className,
   } = props
 
-  // Hanya ambil gambar yang sudah ter-populate sebagai objek Media.
+  // Only include images that are populated as Media objects.
   const items: GalleryItem[] = (images ?? []).flatMap((item) => {
     const media = item?.image
     if (!media || typeof media !== 'object') return []
@@ -75,7 +75,7 @@ export const GalleryBlock: React.FC<Props> = (props) => {
               openLightbox(index)
             }
           },
-          'aria-label': `Perbesar gambar ${index + 1}`,
+          'aria-label': `Zoom image ${index + 1}`,
         }
       : {}
 
@@ -161,7 +161,7 @@ export const GalleryBlock: React.FC<Props> = (props) => {
 }
 
 /* ============================================================
- * Carousel (reuse pola embla seperti di hero)
+ * Carousel (reuses the embla pattern from the hero)
  * ============================================================ */
 const GalleryCarousel: React.FC<{
   items: GalleryItem[]
@@ -206,7 +206,7 @@ const GalleryCarousel: React.FC<{
       className="relative"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Galeri gambar"
+      aria-label="Image gallery"
     >
       <div className="overflow-hidden rounded-lg" ref={emblaRef}>
         <div className="flex gap-3">
@@ -216,7 +216,7 @@ const GalleryCarousel: React.FC<{
               className="relative flex-[0_0_100%] min-w-0 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
               role="group"
               aria-roledescription="slide"
-              aria-label={`${i + 1} dari ${items.length}`}
+              aria-label={`${i + 1} of ${items.length}`}
             >
               <figure
                 className={cn(
@@ -234,7 +234,7 @@ const GalleryCarousel: React.FC<{
                           onImageClick(i)
                         }
                       },
-                      'aria-label': `Perbesar gambar ${i + 1}`,
+                      'aria-label': `Zoom image ${i + 1}`,
                     }
                   : {})}
               >
@@ -255,7 +255,7 @@ const GalleryCarousel: React.FC<{
       </div>
 
       <button
-        aria-label="Sebelumnya"
+        aria-label="Previous"
         className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/70 hover:scale-110 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
         onClick={scrollPrev}
         type="button"
@@ -263,7 +263,7 @@ const GalleryCarousel: React.FC<{
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
-        aria-label="Berikutnya"
+        aria-label="Next"
         className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white transition hover:bg-black/70 hover:scale-110 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
         onClick={scrollNext}
         type="button"
@@ -275,7 +275,7 @@ const GalleryCarousel: React.FC<{
         {items.map((_, i) => (
           <button
             aria-current={i === selectedIndex}
-            aria-label={`Ke slide ${i + 1}`}
+            aria-label={`Go to slide ${i + 1}`}
             className={cn(
               'h-2 rounded-full transition-all duration-300',
               i === selectedIndex
@@ -293,7 +293,7 @@ const GalleryCarousel: React.FC<{
 }
 
 /* ============================================================
- * Lightbox fullscreen (embla untuk navigasi)
+ * Fullscreen lightbox (embla for navigation)
  * ============================================================ */
 const Lightbox: React.FC<{
   items: GalleryItem[]
@@ -316,7 +316,7 @@ const Lightbox: React.FC<{
     }
   }, [emblaApi])
 
-  // Kunci scroll body & dengarkan keyboard selama lightbox terbuka.
+  // Lock body scroll and listen for keyboard input while the lightbox is open.
   useEffect(() => {
     const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
@@ -341,15 +341,15 @@ const Lightbox: React.FC<{
       className="fixed inset-0 z-[100] flex flex-col bg-black/90 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
-      aria-label="Pratinjau galeri"
+      aria-label="Gallery preview"
     >
-      {/* Header: counter + tombol tutup */}
+      {/* Header: counter + close button */}
       <div className="flex items-center justify-between p-4 text-white">
         <span className="text-sm tabular-nums">
           {selectedIndex + 1} / {items.length}
         </span>
         <button
-          aria-label="Tutup"
+          aria-label="Close"
           className="rounded-full bg-white/10 p-2 transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
           onClick={onClose}
           type="button"
@@ -358,7 +358,7 @@ const Lightbox: React.FC<{
         </button>
       </div>
 
-      {/* Area gambar */}
+      {/* Image area */}
       <div className="relative flex-1 overflow-hidden" ref={emblaRef}>
         <div className="flex h-full">
           {items.map((item, i) => (
@@ -383,11 +383,11 @@ const Lightbox: React.FC<{
         <div className="px-4 pb-2 text-center text-sm text-white/80">{current.caption}</div>
       )}
 
-      {/* Navigasi */}
+      {/* Navigation */}
       {items.length > 1 && (
         <>
           <button
-            aria-label="Sebelumnya"
+            aria-label="Previous"
             className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20 hover:scale-110 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             onClick={scrollPrev}
             type="button"
@@ -395,7 +395,7 @@ const Lightbox: React.FC<{
             <ChevronLeft className="h-6 w-6" />
           </button>
           <button
-            aria-label="Berikutnya"
+            aria-label="Next"
             className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-3 text-white transition hover:bg-white/20 hover:scale-110 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             onClick={scrollNext}
             type="button"
