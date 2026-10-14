@@ -13,6 +13,9 @@ import { ProgramGridBlock } from '@/blocks/ProgramGrid/Component'
 import { StatsGridBlock } from '@/blocks/StatsGrid/Component'
 import { TestimonialBlock } from '@/blocks/Testimonial/Component'
 import { VideoEmbedBlock } from '@/blocks/VideoEmbed/Component'
+import { MediaWithTextBlock } from '@/blocks/MediaWithText/Component'
+import { GalleryBlock } from '@/blocks/Gallery/Component'
+import { AccentSectionBlock } from '@/blocks/AccentSection/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -26,6 +29,9 @@ const blockComponents = {
   statsGrid: StatsGridBlock,
   testimonial: TestimonialBlock,
   videoEmbed: VideoEmbedBlock,
+  mediaWithText: MediaWithTextBlock,
+  gallery: GalleryBlock,
+  accentSection: AccentSectionBlock,
 }
 
 export const RenderBlocks: React.FC<{

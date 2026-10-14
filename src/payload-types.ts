@@ -234,6 +234,9 @@ export interface Page {
     | ProgramGridBlock
     | TestimonialBlock
     | VideoEmbedBlock
+    | MediaWithTextBlock
+    | GalleryBlock
+    | AccentSectionBlock
   )[];
   meta?: {
     title?: string | null;
@@ -581,6 +584,10 @@ export interface ContentBlock {
  */
 export interface MediaBlock {
   media: string | Media;
+  /**
+   * Atur posisi media di dalam teks. Opsi "mengambang" membuat paragraf di sekitarnya membungkus di sisi media. Efektif di layar lebar; di layar ponsel media otomatis menumpuk (lebar penuh).
+   */
+  alignment?: ('default' | 'left' | 'right') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -969,6 +976,112 @@ export interface VideoEmbedBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaWithTextBlock".
+ */
+export interface MediaWithTextBlock {
+  mediaPosition?: ('left' | 'right') | null;
+  mediaWidth?: ('oneThird' | 'half' | 'twoThirds') | null;
+  media: string | Media;
+  richText: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Perataan vertikal antara media dan teks ketika ditampilkan berdampingan.
+   */
+  verticalAlignment?: ('center' | 'start') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaWithText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  layout?: ('grid' | 'masonry' | 'carousel') | null;
+  /**
+   * Berlaku untuk tata letak Grid dan Masonry (di layar lebar).
+   */
+  columns?: ('2' | '3' | '4') | null;
+  /**
+   * Klik gambar untuk membukanya layar penuh dengan navigasi sebelumnya/berikutnya.
+   */
+  enableLightbox?: boolean | null;
+  autoplay?: boolean | null;
+  autoplayInterval?: number | null;
+  images?:
+    | {
+        image: string | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AccentSectionBlock".
+ */
+export interface AccentSectionBlock {
+  background?: ('none' | 'muted' | 'card' | 'primary') | null;
+  /**
+   * Aksen dekoratif yang memotong seksi di bagian tengah.
+   */
+  accentStyle?: ('diagonal' | 'band' | 'line' | 'none') | null;
+  accentColor?: ('primary' | 'accent') | null;
+  align?: ('left' | 'center') | null;
+  eyebrow?: string | null;
+  heading: string;
+  description?: string | null;
+  media?: (string | null) | Media;
+  mediaPosition?: ('right' | 'left') | null;
+  /**
+   * Tombol ajakan opsional (maksimal 2).
+   */
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'accentSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1290,6 +1403,9 @@ export interface PagesSelect<T extends boolean = true> {
         programGrid?: T | ProgramGridBlockSelect<T>;
         testimonial?: T | TestimonialBlockSelect<T>;
         videoEmbed?: T | VideoEmbedBlockSelect<T>;
+        mediaWithText?: T | MediaWithTextBlockSelect<T>;
+        gallery?: T | GalleryBlockSelect<T>;
+        accentSection?: T | AccentSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1362,6 +1478,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
  */
 export interface MediaBlockSelect<T extends boolean = true> {
   media?: T;
+  alignment?: T;
   id?: T;
   blockName?: T;
 }
@@ -1513,6 +1630,71 @@ export interface TestimonialBlockSelect<T extends boolean = true> {
 export interface VideoEmbedBlockSelect<T extends boolean = true> {
   url?: T;
   caption?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaWithTextBlock_select".
+ */
+export interface MediaWithTextBlockSelect<T extends boolean = true> {
+  mediaPosition?: T;
+  mediaWidth?: T;
+  media?: T;
+  richText?: T;
+  verticalAlignment?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  layout?: T;
+  columns?: T;
+  enableLightbox?: T;
+  autoplay?: T;
+  autoplayInterval?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AccentSectionBlock_select".
+ */
+export interface AccentSectionBlockSelect<T extends boolean = true> {
+  background?: T;
+  accentStyle?: T;
+  accentColor?: T;
+  align?: T;
+  eyebrow?: T;
+  heading?: T;
+  description?: T;
+  media?: T;
+  mediaPosition?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

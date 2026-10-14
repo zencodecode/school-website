@@ -27,24 +27,34 @@ export const MediaBlock: React.FC<Props> = (props) => {
     media,
     staticImage,
     disableInnerContainer,
+    alignment,
   } = props
 
   let caption
   if (media && typeof media === 'object') caption = media.caption
 
+  // "Mengambang" (float) agar paragraf di sekitarnya membungkus di sisi media.
+  const isFloat = alignment === 'left' || alignment === 'right'
+
   return (
     <div
       className={cn(
-        '',
         {
-          container: enableGutter,
+          container: enableGutter && !isFloat,
+          // Lebar dibatasi ~45% di layar lebar; di ponsel full-width sehingga menumpuk alami.
+          'float-left clear-left mr-6 mb-4 w-full sm:max-w-[45%]': alignment === 'left',
+          'float-right clear-right ml-6 mb-4 w-full sm:max-w-[45%]': alignment === 'right',
         },
         className,
       )}
     >
       {(media || staticImage) && (
         <Media
-          imgClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
+          imgClassName={cn(
+            'border border-border rounded-[0.8rem]',
+            { 'w-full h-auto': isFloat },
+            imgClassName,
+          )}
           resource={media}
           src={staticImage}
         />
@@ -54,7 +64,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
           className={cn(
             'mt-6',
             {
-              container: !disableInnerContainer,
+              container: !disableInnerContainer && !isFloat,
             },
             captionClassName,
           )}
